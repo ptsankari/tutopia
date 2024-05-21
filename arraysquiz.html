@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+         body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .quiz-container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #f4eeff;
+            border-radius: 10px;
+            padding: 60px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2, p {
+            text-align: center;
+            color: #a6b1e1;
+        }
+
+        #question-container {
+            margin-bottom: 20px;
+            font-size: larger;
+        }
+
+        #answer-buttons {
+            display: grid;
+            grid-gap: 10px;
+        }
+
+        button {
+            height: 50px;
+            font-size: 16px;
+            background-color: #a6b1e1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #424874;
+        }
+
+        #controls-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .score-info {
+            margin-top: 20px;
+        }
+
+        #timer-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #timer-text {
+            font-size: 18px;
+            color: #a6b1e1;
+            margin-left: 15px;
+        }
+
+        #timer {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        @media screen and (max-width: 768px) {
+            #answer-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            #answer-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz for Arrays in C++</h1>
+        <div id="question-container">
+          <p id="question-text"></p>
+          <div id="answer-buttons"></div>
+        </div>
+        <div id="controls-container">
+          <button id="start-button">Start Quiz</button>
+          <div id="timer-container">
+            <span id="timer-text">Time Left: <span id="timer">0</span></span>
+          </div>
+        </div>
+    </div>
+    <script>
+            const quizQuestions = [
+            {
+                question: 'Which of the following is not a decision-making statement in C++?',
+                options: ['if', 'else', 'elseif', 'for'],
+                correctAnswer: 'for'
+            },
+            {
+                question: 'Which of the following statements is used to execute a block of code if a condition is false?',
+                options: ['if', 'else', 'elseif', 'for'],
+                correctAnswer: 'else'
+            },
+            {
+                question: 'Which of the following statements is used to execute a block of code based on the value of a variable?',
+                options: ['if', 'else', 'elseif', 'switch'],
+                correctAnswer: 'switch'
+            },
+            {
+                question: 'Which of the following statements is used to execute a block of code if a condition is true?',
+                options: ['if', 'else', 'elseif', 'for'],
+                correctAnswer: 'if'
+            },
+            {
+                question: 'Which of the following statements is used to execute a block of code if a condition is true, and another block of code if the condition is false?',
+                options: ['if', 'else', 'elseif', 'for'],
+                correctAnswer: 'elseif'
+            },
+           
+            
+            ];
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let timeLeft = 120;
+            let timerInterval;
+            function startQuiz() {
+                document.getElementById("start-button").style.display = "none";
+                displayQuestion();
+                startTimer();
+            }
+            function displayQuestion() {
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            const questionText = document.getElementById("question-text");
+            const answerButtons = document.getElementById("answer-buttons");
+            questionText.innerHTML = "";
+            answerButtons.innerHTML = "";
+            questionText.innerHTML = currentQuestion.question;
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement("button");
+                button.innerText = option;
+                button.classList.add("answer-button");
+                answerButtons.appendChild(button);
+                button.addEventListener("click", function() {
+                checkAnswer(option);
+                });
+            });
+            }
+            function checkAnswer(selectedOption) {
+                const currentQuestion = quizQuestions[currentQuestionIndex];
+                if (selectedOption === currentQuestion.correctAnswer) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    displayQuestion();
+                } 
+                else {
+                    endQuiz();
+                }
+            }
+            function startTimer() {
+            timerInterval = setInterval(function() {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                if (timeLeft <= 0) {
+                endQuiz();
+                }
+            }, 1000);
+            }
+            function endQuiz() {
+            clearInterval(timerInterval);
+            const scorePercentage = (score / quizQuestions.length) * 10;
+            const questionContainer = document.getElementById("question-container");
+            questionContainer.innerHTML = `
+                <h2 class="h2">Quiz Completed!</h2>
+                <p class="score-info">Your Score: ${score} out of ${quizQuestions.length}</p>
+                <p class="score-info">Score Percentage: ${scorePercentage}%</p>
+            `;
+            }
+            document.getElementById("start-button").addEventListener("click", startQuiz);   
+      </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>course contents </title>
+  <style>
+    
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 20px;
+      line-height: 30px;
+      background-color: #dcd6f7; /* Fourth color */
+      color: #ffffff; /* White text color */
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin-top: 250px;
+    }
+    .box {
+      position: relative;
+      flex: 1 1 100%;
+      max-width: 400px;
+      border: 2px solid #a6b1e1; /* Red border */
+      border-radius: 20px;
+      margin: 30px;
+      padding: 20px;
+      background-color: #f4eeff; /* First color */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    p {
+      margin: 20px 0;
+    }
+    .line {
+      position: absolute;
+      top: 35%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #dcd6f7; /* Second color */
+      transform: translateY(-50%);
+    }
+    a{
+      color: white;
+      text-decoration: none;
+    }
+    h1 {
+      text-align: center;
+      color: #a6b1e1; /* Third color */
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+    @media only screen and (min-width: 768px) {
+      .box {
+        flex: 1 1 calc(50% - 40px);
+      }
+    }
+    @media only screen and (min-width: 992px) {
+      .box {
+        flex: 1 1 calc(33.333% - 60px);
+      }
+    }
+
+    /* Color Classes */
+    .first-color { 
+      background: #424874; 
+    }
+    
+    .second-color { 
+      background: #424874; 
+    }
+
+    .third-color { 
+      background: #424874; 
+    }
+
+    .fourth-color { 
+      background: #424874; 
+    }
+  </style>
+</head>
+<body>
+  <h1>COURSES</h1>
+  <div class="container">
+    <a href="JAVAMAIN.html">
+    <div class="box first-color">
+      <h2>JAVA</h2>
+      <div class="line"></div>
+      <p>Java is a widely-used programming language for developing various types of applications, including web, mobile, and enterprise applications.</p>
+    </div>
+    </a>
+    
+<a href="MainContentC++.html">
+    <div class="box third-color">
+      <h2>C++</h2>
+      <div class="line"></div>
+      <p>C++ is a powerful object-oriented programming language used in developing system software, game development, and high-performance applications.</p>
+    </div>
+    </a>
+    <a href="mainPage.html">
+    <div class="box second-color">
+      <h2>DBMS</h2>
+      <div class="line"></div>
+      <p>DBMS is software that allows organizations to store, access, and modify database information.DBMS are software used to store, retrieve, and run queries on data.</p>
+    </div>
+  </a>
+  </div>
+</body>
+</html>

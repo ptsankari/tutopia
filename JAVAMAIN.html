@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <title>Java Tutorial</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #d6cfe4;
+            font-family: "P lus Jakarta Sans", sans-serif;
+        }
+        h2{
+            color: #a6b1e1;
+        }
+        
+.video-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.video-container iframe {
+  width: 100%;
+  height: 400px;
+}
+.introquiz {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#next button {
+            border-radius: 50px;
+            border: 1px solid #a6b1e1;
+            background-color: #a6b1e1;
+            font-size: large;
+            color: white;
+            transition: transform 0.2s;
+            width: 150px;
+            height:50px;
+            margin-bottom: 100px;
+}
+
+
+#part2{
+  display: flex;
+}
+#code{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+  border:5px solid black;
+  width: 730px;
+  margin: auto;
+}
+#syn{
+  color: darkgreen;
+}
+
+#out{
+  color: brown;
+}
+#heading{
+  padding: 2%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.sidebar {
+  width: 100%;
+  max-width: 300px;
+  color: #424874;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 340%;
+  overflow-y: auto;
+  z-index: 1;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar ul li {
+  margin-bottom: 20px; 
+  font-size: 25px;
+  margin-left: 20px;
+}
+.sidebar ul li a {
+  text-decoration: none;
+  color: inherit; 
+}
+.sidebar ul li a:hover {
+  color: #dcd6f7;
+}
+
+.ham {
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  color: #424874;
+  background-color: transparent; 
+  padding: 0; 
+  border: none; 
+}
+h1{
+  text-align: center;
+  color: #101111;
+}
+.main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  z-index: 0;
+}
+.notes {
+  padding: 20px;  
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: large;
+}
+@media only screen and (min-width: 768px) {
+  .container {
+      flex-direction: row;
+  }
+  
+  .main {
+      margin-left: 300px;
+  }
+}
+.quizbut{
+    padding: 10px 20px;
+            background-color: #a6b1e1;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius:20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+}
+    </style>
+</head>
+<body>
+  <center><h1 id="heading">JAVA TUTORIAL</h1></center>
+    <div class="ham" onclick="menu()">
+        &#9776</div>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            
+            <ul>
+                <li><a href="#" onclick="content('intro')">Introduction</a></li>
+                <li><a href="#" onclick="content('data')">Data Types</a></li>
+                <li><a href="#" onclick="content('conditional')">Conditional Statements</a></li>
+                <li><a href="#" onclick="content('operator')">Operators</a></li>
+                <li><a href="#" onclick="content('array')">Array</a></li>
+                <li><a href="#" onclick="content('string')">String</a></li>
+                <li><a href="#" onclick="content('arraylist')">ArrayList</a></li>
+                <li><a href="#" onclick="content('mathmethods')">Math Methods</a></li>
+                <li><a href="#" onclick="content('stringmethods')">String Methods</a></li>
+                <li><a href="#" onclick="content('oops')">OOPS</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <div id="intro">
+                <h2>Introduction</h2>
+                
+                    <div class="video-container">
+                        <iframe width="600" height="350" src="https://www.youtube.com/embed/mAtkPQO1FcA?si=L8tgNrR2DiN8HbC2"></iframe>
+                    
+                        <div class="introquiz">
+                            <h2>Take a quiz</h2>
+                            <button type="button" onclick="quiz()" class="quizbut">QUIZ</button> 
+                        </div>
+                    </div>
+            <div class="notes">
+                <h2 style="text-align: center;">Java Introduction</h2>
+                   
+                <h2>History of Java:</h2>
+                <p><b>Java is a popular programming language</b>, created in 1995. JAVA was developed by <b>James Gosling</b> at Sun Microsystems Inc in the year 1995 and later acquired by Oracle Corporation.
+                    It is a simple programming language. Java makes writing, compiling, and debugging programming easy. It helps to create reusable code and modular programs. Java is a class-based, object-oriented programming language and is designed to have as few implementation dependencies as possible. A general-purpose programming language made for developers to write once run anywhere that is compiled Java code can run on all platforms that support Java. 
+                Java applications are compiled to <b>byte code</b> that can run on any Java Virtual Machine.
+                </p>
+               <h2> Java programming language is named JAVA. Why?</h2>
+                <p>After the name OAK, the team decided to give it a new name to it and the suggested words were Silk, Jolt, revolutionary, DNA, dynamic, etc. These all names were easy to spell and fun to say, but they all wanted the name to reflect the essence of technology. In accordance with James Gosling, Java the among the top names along with Silk, and since java was a unique name so most of them preferred it.
+            Java is the name of an island in Indonesia where the first coffee(named java coffee) was produced. And this name was chosen by James Gosling while having coffee near his office. Note that Java is just a name, not an acronym.</p>
+            <p>Java is one of the simple languages as it does not have complex features like <b>pointers, operator overloading, multiple inheritances, and Explicit memory allocation.</b> </p>
+            <div id="part2">
+                    <div id="content">
+                    <h2>The four main concepts of Object-Oriented programming are:</h2>
+                <ul>
+                    <li>Abstraction</li>
+                    <li>Encapsulation</li>
+                <li>Inheritance</li>
+            <li>Polymorphism</li>
+            </ul>
+            
+                <h2>It is used for:</h2>
+                <ul>
+                    <li> Mobile applications (specially Android apps)</li>
+                    <li>Desktop applications</li>
+                    <li>Web applications</li>
+                    <li>Web servers and application servers</li>
+                    <li>Games</li>
+                    <li>Database connection</li>
+                    <li>And much, much more!</li>
+                </ul>
+            </div>
+            <div id="code">
+                <h4>&nbsp;Java Code Syntax:</h4>
+                <h5>&nbsp;&nbsp;&nbsp;File Name: TestClass.java</h5>
+                <p id="syn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public class TestClass{ </p>
+                    <p id="syn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public static void main(String []args){</p>
+                    <p id="out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello World!");</p>  
+                    <p id="syn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}  </p>
+            </div>
+        </div>
+        <br>
+                <div id="next">
+                    <button onclick="content('intro')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('data')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="data" style="display: none;">
+                <h2>Data Types</h2>
+            
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/Le25I331_yU?si=CDhB0TM2NMbA4DzA"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz1()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">Java Data types</h2>
+                <p><b>Data types</b> define the type and value range of the data for the different types of variables, constants, method parameters, returns type, etc. The data type tells the compiler about the type of data to be stored and the required memory. To store and manipulate different types of data, all variables must have specified data types.</p>
+                <h2>Data types are divided into two groups:</h2>
+                <ul>
+                    <li>Primitive data types - includes byte, short, int, long, float, double, boolean and char</li>
+                    <li>Non-primitive data types - such as String, Arrays and Classes</li>
+                </ul>
+                <h2>Primitive Data types:</h2>
+                <p>Primitive data are only single values and have no special capabilities. There are 8 primitive data types.</p>
+                <h2>Non-Primitive Data types:</h2>
+                <p>The Reference Data Types will contain a memory address of variable values because the reference types won’t store the variable value directly in memory. </p>
+                <h2>Example:</h2>
+                <ul>
+                    <li>int myNum = 5;               // Integer (whole number)</li>
+                    <li>float myFloatNum = 5.99f;    // Floating point number</li>
+                    <li>char myLetter = 'D';         // Character</li>
+                    <li>boolean myBool = true;       // Boolean</li>
+                    <li>String myText = "Hello";     // String</li>      
+                </ul>
+                <h2>Numbers</h2>
+                <h2>Primitive number types are divided into two groups:</h2>
+                
+                <p>Integer types stores whole numbers, positive or negative (such as 123 or -456), without decimals. Valid types are byte, short, int and long. Which type you should use, depends on the numeric value.</p>
+                
+                <p>Floating point types represents numbers with a fractional part, containing one or more decimals. There are two types: float and double.</p>
+                <h2>Integer Types</h2>
+                <h4>Byte</h4>
+                <p>The byte data type can store whole numbers from -128 to 127. This can be used instead of int or other integer types to save memory when you are certain that the value will be within -128 and 127</p>
+                <p>byte myNum = 100;<br>
+                    System.out.println(myNum);</p>
+                <h4>Short</h4>
+                <p>The short data type can store whole numbers from -32768 to 32767</p>
+                <p>short myNum = 5000;<br>
+                    System.out.println(myNum);</p>
+                    <h4>int</h4>
+                    <p>The int data type can store whole numbers from -2147483648 to 2147483647. In general, and in our tutorial, the int data type is the preferred data type when we create variables with a numeric value.</p>
+                <p>int myNum = 100000;<br>
+                    System.out.println(myNum);</p>
+                    <h2>Floatingtypes:</h2>
+                    <h4>float and double</h4>
+                    <p>You should use a floating point type whenever you need a number with a decimal, such as 9.99 or 3.14515.
+                            <br>
+                        The float and double data types can store fractional numbers. Note that you should end the value with an "f" for floats and "d" for doubles:</p>
+                    <p>float myNum = 5.75f;<br>
+                        System.out.println(myNum);<br><br>
+                        double myNum = 19.99d;<br>
+                        System.out.println(myNum);</p>
+                        <br>
+                        <div id="next">
+                    <button onclick="content('intro')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('conditional')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="conditional" style="display: none;">
+                <h2>Conditional Statements</h2>
+               
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/ldYLYRNaucM?si=HzKM56VYqJOtedzU" ></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz2()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">Java Conditional Statements</h2>
+                    <h2>Decision Making in Java (if, if-else, switch, break, continue)</h2>
+                    <p>Decision Making in programming is similar to decision-making in real life. In programming also face some situations where we want a certain block of code to be executed when some condition is fulfilled. 
+
+                        A programming language uses control statements to control the flow of execution of a program based on certain conditions. These are used to cause the flow of execution to advance and branch based on changes to the state of a program. </p>
+                    <h2>Java's Selection Statements:</h2>
+                    <ul>
+                        <li>if</li>
+                        <li>if-else</li>
+                        <li>nested-if</li>
+                        <li>if-else-if</li>
+                        <li>switch-case</li>
+                    </ul>
+                    
+                    <h2>Working of if statement:</h2>
+                      <ul>
+                        <li>Control falls into the if block.</li>
+                        <li>The flow jumps to Condition.</li>
+                        <li>Condition is tested.</li>
+                        <ul>
+                        <li>If Condition yields true, goto Step 4.</li>
+                        <li>If Condition yields false, goto Step 5.</li>
+                    </ul>
+                    <li>The if-block or the body inside the if is executed.</li>
+                    <li>Flow steps out of the if block.</li>
+                    </ul>
+                    <h2>Example program:</h2>
+                    <p>class Main {</p><br>
+                        <p>&nbsp;&nbsp;&nbsp;public static void main(String[] args) {</p><br>
+                        <p>&nbsp;&nbsp;&nbsp;// create a string variable</p><br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;String language = "Java";</p><br>
+                      
+                        <p>&nbsp;&nbsp;&nbsp;// if statement</p><br>
+                        <p>&nbsp;&nbsp;&nbsp; if (language == "Java") {</p><br>
+                        <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Best Programming Language");</p><br>
+                    <p> }}}</p>
+                     <br> 
+                
+                
+                <div id="next">
+                    <button onclick="content('data')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('operator')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="operator" style="display: none;">
+                <h2>Operators</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/flWjzwzgybI?si=-b6njthss_93zRw1"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz3()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">Java Operators</h2>
+                    <h2>What are the Java Operators?</h2>
+                    <p>Operators in Java are the symbols used for performing specific operations in Java. Operators make tasks like addition, multiplication, etc which look easy although the implementation of these tasks is quite complex.</p>
+                    <h2>Java divides the operators into the following groups:</h2>
+                    <ul>
+                        <li>Arithmetic operators</li>
+                        <li>Unary Operators</li>
+                        <li>Assignment operators</li>
+                        <li>Comparison operators</li>
+                        <li>Logical operators</li>
+                        <li>Bitwise operators</li>
+                        <li>Ternary Operator</li>
+                    </ul>
+                    <h2>Arithmetic Operator:</h2>
+                    <p>They are used to perform simple arithmetic operations on primitive data types. </p>
+                    <ul>
+                        <li>* : Multiplication</li>
+                        <li>/ : Division</li>
+                        <li>% : Modulo</li>
+                        <li>+ : Addition</li>
+                        <li>– : Subtraction</li>
+                        
+                    </ul>
+                    <h2>Unary Operator:</h2>
+                    <p>Unary operators need only one operand. They are used to increment, decrement, or negate a value.</p>
+                    <ul>
+                        <li><b>– : Unary minus</b>, used for negating the values.</li> 
+                        <li><b>+ : Unary plus</b> indicates the positive value (numbers are positive without this, however). It performs an automatic conversion to int when the type of its operand is the byte, char, or short. This is called unary numeric promotion.</li>
+                        <ul><li><b>++ : Increment operator</b>, used for incrementing the value by 1. There are two varieties of increment operators. </li>
+                            <li><b>Post-Increment:</b> Value is first used for computing the result and then incremented.</li>
+                            <li><b>Pre-Increment:</b> Value is incremented first, and then the result is computed.</li>
+                        </ul>
+                        <ul><li><b>– –  : Decrement operator</b>, used for decrementing the value by 1. There are two varieties of decrement operators.</li>
+                            <li><b>Post-decrement:</b> Value is first used for computing the result and then decremented.</li>
+                            <li><b>Pre-Decrement:</b> The value is decremented first, and then the result is computed.</li>
+                        </ul>
+                        <li><b>! : Logical not operator</b>, used for inverting a boolean value.</li>
+                    </ul>
+                    <h2>Assignment Operator:</h2>
+                    <p> ‘=’ Assignment operator is used to assign a value to any variable. It has right-to-left associativity, i.e. value given on the right-hand side of the operator is assigned to the variable on the left, and therefore right-hand side value must be declared before using it or should be a constant. </p>
+                    <ul>
+                        <li>+=, for adding the left operand with the right operand and then assigning it to the variable on the left.</li>
+                        <li>-=, for subtracting the right operand from the left operand and then assigning it to the variable on the left.</li>
+                        <li>*=, for multiplying the left operand with the right operand and then assigning it to the variable on the left.</li>
+                        <li>/=, for dividing the left operand by the right operand and then assigning it to the variable on the left.</li>
+                        <li>%=, for assigning the modulo of the left operand by the right operand and then assigning it to the variable on the left.</li>
+                    </ul>
+                    <br>
+                    <a href="https://www.geeksforgeeks.org/operators-in-java/"></a>
+
+                <div id="next">
+                    <button onclick="content('conditional')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('array')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="array" style="display: none;">
+                <h2>Array</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/hAk7abWHi3w?si=aRVsMfhLqXHqsiVv"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz4()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">Array</h2>
+                    <p>n Java, Array is a group of like-typed variables referred to by a common name. Arrays in Java work differently than they do in C/C++. Following are some important points about Java arrays. </p>
+                    <h2>Arrays in Java</h2>
+                    <ul>
+                        <li>In Java, all arrays are dynamically allocated. (discussed below)</li>
+                        <li>Arrays may be stored in contiguous memory [consecutive memory locations].</li>
+                        <li>Since arrays are objects in Java, we can find their length using the object property length. This is different from C/C++, where we find length using sizeof.</li>
+                        <li>A Java array variable can also be declared like other variables with [] after the data type.</li>
+                        <li>The variables in the array are ordered, and each has an index beginning with 0.</li>
+                        <li>Java array can also be used as a static field, a local variable, or a method parameter.</li>
+                    </ul>
+                    <p>An array can contain primitives (int, char, etc.) and object (or non-primitive) references of a class depending on the definition of the array. In the case of primitive data types, the actual values might be stored in contiguous memory locations(JVM does not guarantee this behavior). In the case of class objects, the actual objects are stored in a heap segment. </p>
+                    <h2>One-Dimensional Arrays</h2>
+                    <p>The general form of a one-dimensional array declaration is <br>
+                        -- type var-name[];<br>
+                        -- type[] var-name;</p>
+                        <p>An array declaration has two components: the type and the name. type declares the element type of the array. The element type determines the data type of each element that comprises the array. Like an array of integers, we can also create an array of other primitive data types like char, float, double, etc., or user-defined data types (objects of a class). Thus, the element type for the array determines what type of data the array will hold. </p>
+                    <h2>Multidimensional Arrays in Java</h2>
+                    <p>Multidimensional arrays are arrays of arrays with each element of the array holding the reference of other arrays. These are also known as Jagged Arrays. A multidimensional array is created by appending one set of square brackets ([]) per dimension. </p>
+                    <h4>Syntax of Java Multidimensional Array</h4>
+                    <p>There are 2 methods to declare Java Multidimensional Arrays as mentioned below:
+                            <br>
+                        -- datatype [][] arrayrefvariable;<br>
+                        -- datatype arrayrefvariable[][];</p><br>
+
+                
+                <div id="next">
+                    <button onclick="content('operator')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('string')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="string" style="display: none;">
+                <h2>String</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/cV-sOpOgof8?si=jYXSYPUBs1pDcDMq"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz5()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">String in Java</h2>
+                    <h2 >String</h2>
+                    <p>In the given example only one object will be created. Firstly JVM will not find any string object with the value “Welcome” in the string constant pool, so it will create a new object. After that it will find the string with the value “Welcome” in the pool, it will not create a new object but will return the reference to the same instance. In this article, we will learn about Java Strings.</p>
+                    <h2>What are Strings in Java?</h2>
+                    <p>Strings are the type of objects that can store the character of values and in Java, every character is stored in 16 bits i,e using UTF 16-bit encoding. A string acts the same as an array of characters in Java.</p>
+                    <h2>Example:</h2>
+                    <p>String name = "Geeks";</p>
+                    <h2>Ways of Creating a String</h2>
+                    <p>There are two ways to create a string in Java: </p>
+                    <ul>
+                        <li>String Literal</li>
+                        <li>Using new Keyword</li>
+                    </ul>
+                    <h2>Syntax:</h2>
+                    <p> String_Type string_variable = "sequence_of_string"; </p>
+                    <h2>String Literal:</h2>
+                    <p>To make Java more memory efficient (because no new objects are created if it exists already in the string constant pool). </p>
+                    <h4>Example:</h4>
+                    <p>String demoString = “GeeksforGeeks”;</p>
+                    <h2>Using new keyword:</h2>
+                    <p>String s = new String(“Welcome”);<br>
+                        In such a case, JVM will create a new string object in normal (non-pool) heap memory and the literal “Welcome” will be placed in the string constant pool. The variable s will refer to the object in the heap (non-pool)</p>
+                    <h4>Example:</h4>
+                    <p>String demoString = new String (“GeeksforGeeks”);</p>
+                    <h2>Interfaces and Classes in Strings in Java</h2>
+                    <p><b>CharBuffer:</b> This class implements the CharSequence interface. This class is used to allow character buffers to be used in place of CharSequences. An example of such usage is the regular-expression package java.util.regex.</p>
+                    <p><b>String:</b> It is a sequence of characters. In Java, objects of String are immutable which means a constant and cannot be changed once created.</p>
+
+                <br>
+                
+                <div id="next">
+                    <button onclick="content('array')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('arraylist')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="arraylist" style="display: none;">
+                <h2>ArrayList</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/BqQ0qR8kmw8?si=Ga3trL5J4KWmRp-u"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz6()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">ArrayList in Java</h2>
+                    <h2>ArrayList:</h2>
+                    <p>Java ArrayList is a part of the Java collections framework and it is a class of java.util package. It provides us with dynamic arrays in Java. Though, it may be slower than standard arrays but can be helpful in programs where lots of manipulation in the array is needed. This class is found in java.util package. The main advantage of ArrayList in Java is, that if we declare an array then we need to mention the size, but in ArrayList, it is not needed to mention the size of ArrayList. If you want to mention the size then you can do it.</p>
+                    <h2>What is ArrayList in Java?</h2>
+                    <p>ArrayList is a Java class implemented using the List interface. Java ArrayList, as the name suggests, provides the functionality of a dynamic array where the size is not fixed as an array. Also, as a part of the Collections framework, it has many features not available with arrays.</p>
+                    <h2>Important Features of ArrayList in Java</h2>
+                    <ul>
+                        <li>ArrayList inherits AbstractList class and implements the List interface.</li>
+                        <li>ArrayList is initialized by size. However, the size is increased automatically if the collection grows or shrinks if the objects are removed from the collection.</li>
+                        <li>Java ArrayList allows us to randomly access the list.</li>
+                        <li>ArrayList can not be used for primitive types, like int, char, etc. We need a wrapper class for such cases.</li>
+                        <li>ArrayList in Java can be seen as a vector in C++.</li>
+                        <li>ArrayList is not Synchronized. Its equivalent synchronized class in Java is Vector.</li>
+
+                    </ul>
+                    <h2>Constructors in ArrayList in Java</h2>
+                    <p>In order to Create an ArrayList, we need to create an object of the ArrayList class. The ArrayList class consists of various constructors which allow the possible creation of the array list. The following are the constructors available in this class:</p>
+                    <h4>1. ArrayList()</h4>
+                    <p>This constructor is used to build an empty array list. If we wish to create an empty ArrayList with the name arr, then, it can be created as:</p>
+                    <p>Syntax:   ArrayList arr = new ArrayList(); </p>
+                    <h4>2. ArrayList(Collection c)</h4>
+                    <p>This constructor is used to build an array list initialized with the elements from the collection c. Suppose, we wish to create an ArrayList arr which contains the elements present in the collection c, then, it can be created as: </p>
+                    <p>Syntax: ArrayList arr = new ArrayList(c);  </p>
+                    <h4>3. ArrayList(int capacity)</h4>
+                    <p>This constructor is used to build an array list with the initial capacity being specified. Suppose we wish to create an ArrayList with the initial size being N, then, it can be created as:</p>
+                    <p>Syntax: ArrayList arr = new ArrayList(N); </p>
+                <h2>Some Key Points of ArrayList in Java</h2>
+                <ul>
+                    <li>ArrayList is Underlined data Structure Resizable Array or Growable Array.</li>
+                    <li>ArrayList Duplicates Are Allowed.</li>
+                    <li>Insertion Order is Preserved.</li>
+                    <li>Heterogeneous objects are allowed.</li>
+                    <li>Null insertion is possible.</li>
+                </ul>
+                <br>
+
+                <div id="next">
+                    <button onclick="content('string')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('mathmethods')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="mathmethods" style="display: none;">
+                <h2>Math Methods</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/xR82Jx4pqIc?si=EAdtyHtHQiJZgbCE"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz7()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">Math Methods in Java</h2>
+                    <h2>Math methods Class</h2>
+                    <p>Java Math class provides several methods to work on math calculations like min(), max(), avg(), sin(), cos(), tan(), round(), ceil(), floor(), abs() etc.<br>
+
+                        Unlike some of the StrictMath class numeric methods, all implementations of the equivalent function of Math class can't define to return the bit-for-bit same results. This relaxation permits implementation with better-performance where strict reproducibility is not required.</p>
+                    <h2>Basic Math Methods</h2>
+                    <p>The java.lang.Math class contains various methods for performing basic numeric operations such as the logarithm, cube root, and trigonometric functions etc. The various java math methods are as follows:</p>
+                    <ul>
+                        <li>Math.abs()</li>
+                        <p>It will return the Absolute value of the given value.</p>
+                        <li>Math.max()</li>
+                        <p>It returns the Largest of two values.</p>
+                        <li>Math.min()</li>
+                        <p>It is used to return the Smallest of two values.</p>
+                        <li>Math.round()</li>
+                        <p>It is used to round of the decimal numbers to the nearest value.</p>
+                        <li>Math.sqrt()</li>
+                        <p>It is used to return the square root of a number.</p>
+                        <li>Math.pow()</li>
+                        <p>It returns the value of first argument raised to the power to second argument.</p>
+                        <li>Math.cbrt()</li>
+                        <p>It is used to return the cube root of a number.</p>
+                        <li>Math.floor()</li>
+                        <p>It is used to find the largest integer value which is less than or equal to the argument and is equal to the mathematical integer of a double value.</p>
+                        <li>Math.random()</li>
+                        <p>It returns a double value with a positive sign, greater than or equal to 0.0 and less than 1.0.</p>
+                    </ul>
+                <h2>Logarithmic Math Methods</h2>
+                <ul>
+                    <li>Math.log()</li>
+                    <p>It returns the natural logarithm of a double value.</p>
+                    <li>Math.log10()</li>
+                    <p>It is used to return the base 10 logarithm of a double value.</p>
+                    <li>Math.exp()</li>
+                    <p>It returns E raised to the power of a double value, where E is Euler's number and it is approximately equal to 2.71828.</p>
+        
+                </ul>
+                <h2>Trigonometric Math Methods</h2>
+                <ul>
+                    <li>Math.sin()</li>
+                    <p>It is used to return the trigonometric Sine value of a Given double value.</p>
+                    <li>Math.cos()</li>
+                    <p>It is used to return the trigonometric Cosine value of a Given double value.</p>
+                    <li>Math.tan()</li>
+                    <p>It is used to return the trigonometric Tangent value of a Given double value.</p>
+                </ul>
+                <br>
+                <div id="next">
+                    <button onclick="content('arraylist')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('stringmethods')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="stringmethods" style="display: none;">
+                <h2>String Methods</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/Ml08Trm5a58?si=T5wuYuySIdXUtG0y"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz8()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">String Methods in Java</h2>
+                    <h2>String Methods</h2>
+                    <p>Java has a lot of String methods that allow us to work with strings. In this reference page, you will find all the string methods available in Java. For example, if you need to find the length of a string, use the length() method.</p>
+                    <h2>Basic String Methods</h2>
+                    <ul>
+                        <li>charAt()</li>
+                        <p>Returns the character at the specified index (position)</p>
+                        <li>compareTo()</li>
+                        <p>Compares two strings lexicographically</p>
+                        <li>compareToIgnoreCase()</li>
+                        <p>Compares two strings lexicographically, ignoring case differences</p>
+                        <li>concat()</li>
+                        <p>	Appends a string to the end of another string	</p>
+                        <li>contains()</li>
+                        <p>Checks whether a string contains a sequence of characters</p>
+                        <li>equals()</li>
+                        <p>Compares two strings. Returns true if the strings are equal, and false if not</p>
+                        <li>indexOf()</li>
+                        <p>Returns the position of the first found occurrence of specified characters in a string</p>
+                        <li>isEmpty()</li>
+                        <p>Checks whether a string is empty or not</p>
+                        <li>join()</li>
+                        <p>Joins one or more strings with a specified separator</p>
+                        <li>lastIndexOf()</li>
+                        <p>Returns the position of the last found occurrence of specified characters in a string</p>
+                        <li>length()</li>
+                        <p>Returns the length of a specified string</p>
+                        <li>replace()</li>
+                        <p>Searches a string for a specified value, and returns a new string where the specified values are replaced</p>
+                        <li>replaceFirst()</li>
+                        <p>Replaces the first occurrence of a substring that matches the given regular expression with the given replacement</p>
+                        <li>split()</li>
+                        <p>Splits a string into an array of substrings</p>
+                        <li>toLowerCase()</li>
+                        <p>Converts a string to lower case letters</p>
+                        <li>toUpperCase()</li>
+                        <p>Converts a string to upper case letters</p>
+                    </ul>
+                
+                <br>
+                <div id="next">
+                    <button onclick="content('mathmethods')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('oops')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            <div id="oops" style="display: none;">
+                <h2>OOPS</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/6T_HgnjoYwM?si=vJa5w1kP5Q5U7gf3"></iframe>
+                
+                    <div class="introquiz">
+                        <button type="button" onclick="quiz9()" class="btn btn-primary btn-lg">QUIZ</button> 
+                    </div>
+                </div>
+                
+                <div class="notes">
+                    <h2 style="text-align: center;">OOPS in Java</h2>
+                    <h2>Object Oriented Programming (OOPs) Concept in Java</h2>
+                    <p>As the name suggests, Object-Oriented Programming or OOPs refers to languages that use objects in programming, they use objects as a primary source to implement what is to happen in the code. Objects are seen by the viewer or user, performing tasks assigned by you. Object-oriented programming aims to implement real-world entities like inheritance, hiding, polymorphism etc. in programming. The main aim of OOP is to bind together the data and the functions that operate on them so that no other part of the code can access this data except that function. </p>
+                    <h2>Access Modifier</h2>
+                    <p><b>Access Modifier:</b>b Defines the access type of the method i.e. from where it can be accessed in your application. In Java, there are 4 types of access specifiers: </p>
+                    <ul>
+                        <li>public:</li>
+                        <p>Accessible in all classes in your application.</p>
+                        <li>protected: </li>
+                        <p>Accessible within the package in which it is defined and in its subclass(es) (including subclasses declared outside the package).</p>
+                        <li>private: </li>
+                        <p>Accessible only within the class in which it is defined.</p>
+                        <li>default (declared/defined without using any modifier): </li>
+                        <p>Accessible within the same class and package within which its class is defined.</p>
+                    </ul>
+                <h2>OOPS concepts are as follows: </h2>
+                <ul>
+                    <li>Class</li>
+                    <li>Object </li>
+                    <li>Pillars of OOPs</li>
+                    <ul>
+                        <li>Abstraction</li>
+                        <li>Encapsulation</li>
+                        <li>Inheritance</li>
+                        <li>Polymorphism</li>
+                    </ul>
+                </ul>
+
+            <h2>Class</h2>
+            <p>Collection of objects is called class. It is a logical entity.
+                    <br>
+                A class can also be defined as a blueprint from which you can create an individual object. Class doesn't consume any space.</p>
+            <h2>Object</h2>
+            <p>An entity that has state and behavior is known as an object e.g., chair, bike, marker, pen, table, car, etc. It can be physical or logical (tangible and intangible). The example of an intangible object is the banking system.</p>
+            <h2>Abstraction</h2>
+            <p>Hiding internal details and showing functionality is known as abstraction. For example phone call, we don't know the internal processing.
+                <br>
+                In Java, we use abstract class and interface to achieve abstraction.</p>
+            <h2>Encapsulation</h2>
+            <p>Binding (or wrapping) code and data together into a single unit are known as encapsulation. For example, a capsule, it is wrapped with different medicines.
+                <br>
+                A java class is the example of encapsulation. Java bean is the fully encapsulated class because all the data members are private here.</p>
+            <h2>Inheritance</h2>
+            <p>When one object acquires all the properties and behaviors of a parent object, it is known as inheritance. It provides code reusability. It is used to achieve runtime polymorphism.</p>
+            <h2>Polymorphism</h2>
+            <p>If one task is performed in different ways, it is known as polymorphism. For example: to convince the customer differently, to draw something, for example, shape, triangle, rectangle, etc.
+                <br>
+                In Java, we use method overloading and method overriding to achieve polymorphism.
+                <br>
+                Another example can be to speak something; for example, a cat speaks meow, dog barks woof, etc.</p>
+<br>
+
+                <div id="next"> 
+                    <button onclick="content('stringmethods')" class="btn btn-success btn-lg active" >Previous</button>
+                    <button style="float:right" onclick="content('intro')" class="btn btn-success btn-lg active" >Next</button>
+                </div>
+            </div>
+        </div>
+            
+        </div>
+    </div> 
+    <script>
+        function menu() {
+    var s = document.getElementById('sidebar');
+    s.style.transform = s.style.transform === 'translateX(0px)' ? 'translateX(-100%)' : 'translateX(0px)';
+}
+function content(id) {
+    var content = document.querySelectorAll('.main > div');
+    content.forEach(function(div) {
+        div.style.display = div.id === id ? 'block' : 'none';
+    });
+
+
+    contentArray.forEach(function(div, index) {
+        if (div.id === id) {
+            currentIndex = index;
+        }
+    });
+
+    if (window.innerWidth < 768) {
+        document.getElementById('sidebar').style.transform = 'translateX(-100%)';
+    }
+}
+
+document.querySelectorAll('.sidebar a').forEach(function(link) {
+    link.addEventListener('click', function() {
+        if (window.innerWidth < 768) {
+            document.getElementById('sidebar').style.transform = 'translateX(-100%)';
+        }
+    });
+});
+        
+        function quiz(){
+            window.open('quizjava.html');
+        }
+        function backtohome(){
+            window.open('JAVAMAIN.html');
+        }
+        function quiz1(){
+            window.open('quiz1.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz2(){
+            window.open('quiz2.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz3(){
+            window.open('quiz3.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz4(){
+            window.open('quiz4.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz5(){
+            window.open('quiz5.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz6(){
+            window.open('quiz6.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz7(){
+            window.open('quiz7.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz8(){
+            window.open('quiz8.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        function quiz9(){
+            window.open('quiz9.html');
+        }
+        function backtohome(){
+            window.open('FSD_PROJECT_JAVA.html');
+        }
+        
+
+        
+
+        
+
+    
+    </script> 
+</body>
+</html>

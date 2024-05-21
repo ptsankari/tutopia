@@ -1,0 +1,143 @@
+
+.video-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.video-container iframe {
+  width: 100%;
+  height: 400px;
+}
+.introquiz {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#next button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  margin: 0 10px;
+  float:inline-start;
+  width: 90px;
+}
+#next button:first-child {
+  text-align: left;
+}
+
+#next button:last-child {
+  text-align: right;
+  
+}
+
+#part2{
+  display: flex;
+}
+#code{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+  border:5px solid black;
+  width: 730px;
+  margin: auto;
+}
+#syn{
+  color: darkgreen;
+}
+
+#out{
+  color: brown;
+}
+#heading{
+  padding: 2%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.sidebar {
+  width: 100%;
+  max-width: 300px;
+  color: #424874;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 340%;
+  overflow-y: auto;
+  z-index: 1;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar ul li {
+  margin-bottom: 20px; 
+  font-size: 25px;
+  margin-left: 20px;
+}
+.sidebar ul li a {
+  text-decoration: none;
+  color: inherit; 
+}
+.sidebar ul li a:hover {
+  color: #dcd6f7;
+}
+
+.ham {
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  color: #424874;
+  background-color: transparent; 
+  padding: 0; 
+  border: none; 
+}
+h1{
+  text-align: center;
+  color: #101111;
+}
+.main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  z-index: 0;
+}
+.notes {
+  padding: 20px;  
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: large;
+}
+@media only screen and (min-width: 768px) {
+  .container {
+      flex-direction: row;
+  }
+  
+  .main {
+      margin-left: 300px;
+  }
+}

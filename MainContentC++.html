@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++</title>
+    <style>
+        body {
+            font-size:25px;
+            line-height: 40px;
+            background-color: #f4eeff;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .sidebar {
+            width: 100%;
+            max-width: 300px;
+            color: #424874;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+            position: absolute;
+            top: 10px;
+            left: 0;
+            height: 340%;
+            overflow-y: auto;
+            z-index: 1;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            margin-bottom: 20px; 
+            font-size: 25px;
+            margin-left: 20px;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: inherit; 
+        }
+        .sidebar ul li a:hover {
+            color: #dcd6f7;
+        }
+
+        .ham {
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            color: #424874;
+            background-color: transparent; 
+            padding: 0; 
+            border: none; 
+
+        }
+        h1 {
+            text-align: center;
+            color: #a6b1e1;
+        }
+        h2{
+            color: #a6b1e1;
+        }
+      
+        .main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            position: relative;
+            z-index: 0;
+        }
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 700px;
+        }
+        .introquiz {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: white;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #a6b1e1;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius:20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .code {
+            background: #f4f4f4;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #dcd6f7;
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .quiz-button:hover {
+            background-color:whitesmoke;
+        }
+        .notes {
+            padding: 20px;  
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: large;
+        }
+        .button-container {
+            text-align: center;
+            
+        }
+
+        .prev-button {
+            margin-left: 320px;
+            float: left;
+            border-radius: 50px;
+            border: 1px solid whitesmoke;
+            background-color: #a6b1e1;
+            font-size: large;
+            color: white;
+            width:150px;
+            height: 50px;
+            margin-bottom: 100px;
+        }
+
+        .next-button {
+            margin-left:100px;
+            float: left;
+            border-radius: 50px;
+            border: 1px solid #a6b1e1;
+            background-color: #a6b1e1;
+            font-size: large;
+            color: white;
+            transition: transform 0.2s;
+            width: 150px;
+            height:50px;
+            margin-bottom: 100px;
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .prev-button, .next-button {
+                margin: 0;
+                float: none;
+            }
+        }
+        @media only screen and (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+            
+            .main {
+                margin-left: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>C++</h1>
+    <div class="ham" onclick="menu()">
+        &#9776
+    </div>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="#" onclick="content('intro')">Introduction</a></li>
+                <li><a href="#" onclick="content('data')">Data Types</a></li>
+                <li><a href="#" onclick="content('operators')">Operators</a></li>
+                <li><a href="#" onclick="content('control')">Control Statements</a></li>
+                <li><a href="#" onclick="content('array')">Array</a></li>
+                <li><a href="#" onclick="content('function')">Function</a></li>
+                <li><a href="#" onclick="content('inheritance')">Inheritance</a></li>
+                <li><a href="#" onclick="content('OOPS')">OOPS</a></li>
+                <li><a href="#" onclick="content('structures')">Structures</a></li>
+                <li><a href="#" onclick="content('pointers')">Pointers</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <div id="intro">
+                <h2>Introduction</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/OTroAxvRNbw?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="quiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Introduction</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>C++ is a general-purpose programming language that was developed as an enhancement of the C language to include object-oriented paradigm.</p>
+                        </li>
+                        <li>
+                            <p>It is an imperative and a compiled language.</p>
+                        </li>
+                        <li>
+                            <p>C++ is a high-level, general-purpose programming language designed for system and application programming.</p>
+                        </li>
+                        <li>
+                            <p>It was developed by Bjarne Stroustrup at Bell Labs in 1983 as an extension of the C programming language.</p>
+                        </li>
+                        <li>
+                            <p>C++ is an object-oriented, multi-paradigm language that supports procedural, functional, and generic programming styles.</p>
+                        </li>
+                        <li>
+                            <p>One of the key features of C++ is its ability to support low-level, system-level programming, making it suitable for developing <br> operating systems, device drivers, and other system software.</p>
+                        </li>
+                        <li>
+                            <p>At the same time, C++ also provides a rich set of libraries and features for high-level application programming, <br>making it a popular choice for developing desktop applications, video games, and other complex applications.</p>
+                        </li>
+                    </ol>
+                    <h2>Applications of C++: </h2>
+                    <p>C++ finds varied usage in applications such as:</p>
+                        <ul>
+                            <li>Operating Systems & Systems Programming. e.g. Linux-based OS (Ubuntu etc.)</li>
+                            <li>Browsers (Chrome & Firefox)</li>
+                            <li>Graphics & Game engines (Photoshop, Blender, Unreal-Engine)</li>
+                            <li>Database Engines (MySQL, MongoDB, Redis etc.)</li>
+                            <li>Cloud/Distributed Systems</li>
+                        </ul>
+                    <h2>Advantages of C++:</h2>
+                    <ul>
+                        <li>Performance: C++ is a compiled language, which means that its code is compiled into machine-readable code,<br>making it one of the fastest programming languages.</li>
+                        <li>Object-Oriented Programming: C++ supports object-oriented programming, which makes it easier to write <br> and maintain large, complex applications.</li>
+                        <li>Standard Template Library (STL): The STL provides a wide range of algorithms and data structures for working with data,<br> making it easier to write efficient and effective code.</li>
+                        <li>Machine Independent: C++ is not tied to any hardware or processor. If the compiler compiles the program in the system, <br>it will be able to run no matter what the hardware is.</li>
+                        <li>Large Community: C++ has a large, active community of developers and users, providing a wealth of <br> resources and support for learning and using the language.</li>
+                    </ul>
+                    
+                    <h2>Disadvantages of C++:</h2>
+                    <ul>
+                        <li>Steep Learning Curve: C++ can be challenging to learn, especially for beginners, due to its <br>complexity and the number of concepts that need to be understood.</li>
+                        <li>Verbose Syntax: C++ has a verbose syntax, which can make code longer and more difficult to read and maintain.</li>
+                        <li>Error-Prone: C++ provides low-level access to system resources, which can lead to subtle <br>errors that are difficult to detect and fix.</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="data" style="display: none;">
+                <h2>Data Types</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/OTroAxvRNbw?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="dataquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Data Types</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>C++ supports a wide variety of data types and the programmer can select the data type appropriate to the needs of the application. Data types specify the size and types of values to be stored.</p>
+                        </li>
+                        <li>
+                            <p>However, storage representation and machine instructions to manipulate each data type differ from machine to machine, although C++ instructions are identical on all machines.</p>
+                        </li>
+                        <li>
+                            <p>C++ supports the following data types:</p>
+                            <ol>
+                                <li>
+                                    <p>Primary or Built-in or Fundamental data types:</p>
+                                    <ul>
+                                        <li>int: Integer data type</li>
+                                        <li>float: Floating-point data type</li>
+                                        <li>double: Double-precision floating-point data type</li>
+                                        <li>char: Character data type</li>
+                                        <li>bool: Boolean data type</li>
+                                        <li>void: Represents the absence of type</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Derived data types:</p>
+                                    <ul>
+                                        <li>Array Types</li>
+                                        <li>Pointer Types</li>
+                                        <li>Reference Types</li>
+                                        <li>Function Types</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>User-defined data types:</p>
+                                    <ul>
+                                        <li>Structures</li>
+                                        <li>Classes</li>
+                                        <li>Enumerations</li>
+                                        <li>Unions</li>
+                                        <li>Typedefs</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </li>
+                       
+                    </ol>
+                    <h2>Advantages of C++:</h2>
+                    <ul>
+                        <li>Data types provide a way to categorize and organize data in a program, making it easier to understand and manage.</li>
+                        <li>Each data type has a specific range of values it can hold, allowing for more precise control over the type of data being stored.</li>
+                        <li>Data types help prevent errors and bugs in a program by enforcing strict rules about how data can be used and manipulated.</li>
+                    </ul>
+                    
+                    <h2>Disadvantages of C++:</h2>
+                    <ul>
+                        <li>Using the wrong data type can result in unexpected behavior and errors in a program.</li>
+                        <li>The use of data types can add additional complexity and verbosity to a program, making it harder to read and understand.</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="operators" style="display: none;">
+                <h2>Operators</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/JBgZxnAj4hg?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="operatorsquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Operators</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>An operator is a symbol that operates on a value to perform specific mathematical or logical computations. They form the foundation of any programming language.</p>
+                        </li>
+                        <li>
+                            <p> In C++, we have built-in operators to provide the required functionality.</p>
+                        </li>
+                        <li>
+                            <p>Operators in C++ can be classified into 6 types:</p>
+                            <ol>
+                                <li>
+                                    <strong>Arithmetic Operators:</strong>
+                                    <ul>
+                                        <li>Addition (+)</li>
+                                        <li>Subtraction (-)</li>
+                                        <li>Multiplication (*)</li>
+                                        <li>Division (/)</li>
+                                        <li>Modulus (%)</li>
+                                        <li>Increment (++)</li>
+                                        <li>Decrement (--)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Relational Operators:</strong>
+                                    <ul>
+                                        <li>Equal to (==)</li>
+                                        <li>Not equal to (!=)</li>
+                                        <li>Greater than (>)</li>
+                                        <li>Less than (<)</li>
+                                        <li>Greater than or equal to (>=)</li>
+                                        <li>Less than or equal to (<=)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Logical Operators:</strong>
+                                    <ul>
+                                        <li>Logical AND (&&)</li>
+                                        <li>Logical OR (||)</li>
+                                        <li>Logical NOT (!)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Bitwise Operators:</strong>
+                                    <ul>
+                                        <li>Bitwise AND (&)</li>
+                                        <li>Bitwise OR (|)</li>
+                                        <li>Bitwise XOR (^)</li>
+                                        <li>Bitwise NOT (~)</li>
+                                        <li>Left shift (<<)</li>
+                                        <li>Right shift (>>)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Assignment Operators:</strong>
+                                    <ul>
+                                        <li>Assignment (=)</li>
+                                        <li>Addition assignment (+=)</li>
+                                        <li>Subtraction assignment (-=)</li>
+                                        <li>Multiplication assignment (*=)</li>
+                                        <li>Division assignment (/=)</li>
+                                        <li>Modulus assignment (%=)</li>
+                                        <li>Bitwise AND assignment (&=)</li>
+                                        <li>Bitwise OR assignment (|=)</li>
+                                        <li>Bitwise XOR assignment (^=)</li>
+                                        <li>Left shift assignment (<<=)</li>
+                                        <li>Right shift assignment (>>=)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Ternary or Conditional Operators:</strong>
+                                    <ul>
+                                        <li>Ternary conditional operator (?:)</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div id="control" style="display: none;">
+                <h2>Control Statements</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/AY96XFqb934?autoplay="></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="controlquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Control Statements</h2>
+                    <p><br> Decision-making in C++ involves the usage of conditional statements (also called decision control statements) to execute specific blocks of code primarily based on given situations and their results.</p>
+                    <h3>Types of Decision-Making Statements in C++</h3>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <strong>if Statement:</strong>
+                            <p>The <code>if</code> statement is used to execute a block of code if a specified condition is true.</p>
+                            <pre><code class="cpp">if (condition) {
+                // code block to be executed if the condition is true
+            }</code></pre>
+                        </li>
+                        <li>
+                            <strong>if-else Statement:</strong>
+                            <p>The <code>if-else</code> statement is used to execute one block of code if the condition is true, and another block if the condition is false.</p>
+                            <pre><code class="cpp">if (condition) {
+                // code block to be executed if the condition is true
+            } else {
+                // code block to be executed if the condition is false
+            }</code></pre>
+                        </li>
+                        <li>
+                            <strong>if-else-if Ladder:</strong>
+                            <p>The <code>if-else-if</code> ladder is used when multiple conditions need to be checked.</p>
+                            <pre><code class="cpp">if (condition1) {
+                // code block to be executed if condition1 is true
+            } else if (condition2) {
+                // code block to be executed if condition2 is true
+            } else {
+                // code block to be executed if all conditions are false
+            }</code></pre>
+                        </li>
+                        <li>
+                            <strong>Nested if Statement:</strong>
+                            <p>The <code>nested if</code> statement is an <code>if</code> statement inside another <code>if</code> statement.</p>
+                            <pre><code class="cpp">if (condition1) {
+                if (condition2) {
+                    // code block to be executed if both condition1 and condition2 are true
+                }
+            }</code></pre>
+                        </li>
+                        <li>
+                            <strong>switch Statement:</strong>
+                            <p>The <code>switch</code> statement is used to select one of many code blocks to be executed.</p>
+                            <pre><code class="cpp">switch (expression) {
+                case value1:
+                    // code block to be executed if expression equals value1
+                    break;
+                case value2:
+                    // code block to be executed if expression equals value2
+                    break;
+                default:
+                    // code block to be executed if expression doesn't match any case
+            }</code></pre>
+                        </li>
+                        <li>
+                            <strong>Conditional Operator:</strong>
+                            <p>The conditional operator <code>(condition) ? value1 : value2</code> returns <code>value1</code> if the condition is true, and <code>value2</code> otherwise.</p>
+                            <pre><code class="cpp">int result = (x > y) ? x : y;</code></pre>
+                        </li>
+                        <li>
+                            <strong>Jump Statements:</strong>
+                            <p>Jump statements in C++ are used to alter the flow of control within loops, switch statements, or functions.</p>
+                            <ul>
+                                <li>
+                                    <strong>break:</strong>
+                                    <p>The <code>break</code> statement is used to terminate the loop or switch statement it is in. It is usually used in conjunction with loops or switch statements.</p>
+                                    <pre><code class="cpp">for (int i = 0; i < 10; i++) {
+                if (i == 5) {
+                    break; // Terminate the loop when i equals 5
+                }
+                // Other loop operations
+            }</code></pre>
+                                </li>
+                                <li>
+                                    <strong>continue:</strong>
+                                    <p>The <code>continue</code> statement is used to skip the rest of the loop body and start the next iteration of the loop. It is also typically used in loops.</p>
+                                    <pre><code class="cpp">for (int i = 0; i < 10; i++) {
+                if (i == 5) {
+                    continue; // Skip the iteration when i equals 5
+                }
+                // Other loop operations
+            }</code></pre>
+                                </li>
+                                <li>
+                                    <strong>goto:</strong>
+                                    <p>The <code>goto</code> statement is used to transfer control to a labeled statement within the same function. Its usage is generally discouraged due to its potential to create unreadable and unmaintainable code.</p>
+                                    <pre><code class="cpp">int x = 10;
+            if (x == 10) {
+                goto end; // Jump to the 'end' label
+            }
+            // Other statements
+            end:
+                // Statement(s) to be executed
+            </code></pre>
+                                </li>
+                                <li>
+                                    <strong>return:</strong>
+                                    <p>The <code>return</code> statement is used to exit a function and return a value to the calling function. It can also be used to prematurely exit a loop or switch statement within a function.</p>
+                                    <pre><code class="cpp">int add(int a, int b) {
+                return a + b; // Return the sum of a and b
+            }</code></pre>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div id="array" style="display: none;">
+                <h2>Array</h2>
+                                
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/1FVBeLD_FdE?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="arraysquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Arrays</h2>
+                    <p>Arrays are used to store multiple values in a single variable, instead of declaring separate variables for each value.</p>
+                    <p>To declare an array, define the variable type, specify the name of the array followed by square brackets and specify the number of elements it should store:</p>
+                    <pre><code>string cars[4];
+                    </code></pre>
+                    <p>We have now declared a variable that holds an array of four strings. To insert values into it, we can use an array literal - place the values in a comma-separated list, inside curly braces:</p>
+                    <pre><code>string cars[4] = {"Volvo", "BMW", "Ford", "Mazda"};
+                    </code></pre>
+                    <p>To create an array of three integers, you could write:</p>
+                    <pre><code>int myNum[3] = {10, 20, 30};
+                    </code></pre>
+                    <h3>Accessing the Elements of an Array</h3>
+                    <p>You access an array element by referring to the index number inside square brackets [].</p>
+                    <p>This statement accesses the value of the first element in cars:</p>
+                    <pre><code>string cars[4] = {"Volvo", "BMW", "Ford", "Mazda"};
+                    cout << cars[0]; // Outputs Volvo
+                    </code></pre>
+                    <p>Note: Array indexes start with 0: [0] is the first element. [1] is the second element, etc.</p>
+                    <h3>Changing an Array Element</h3>
+                    <p>To change the value of a specific element, refer to the index number:</p>
+                    <pre><code>string cars[4] = {"Volvo", "BMW", "Ford", "Mazda"};
+                    cars[0] = "Opel";
+                    cout << cars[0]; // Now outputs Opel instead of Volvo
+                    </code></pre>
+                </div>          
+            </div>
+            <div id="function" style="display: none;">
+                <h2>Function</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/C83tPpvxIJA?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="functionsquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Functions</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>A function is a set of statements that takes input, does some specific computation, and produces output. The idea is to put some commonly or repeatedly done tasks together to make a function so that instead of writing the same code again and again for different inputs, we can call this function.</p>
+                        </li>
+                        <h3>Why Do We Need Functions?</h3>
+                    <ul>
+                        <li>Code Redundancy Reduction: Functions help in reducing code redundancy by allowing us to write reusable code.</li>
+                        <li>Modularity: Functions make code modular, enhancing readability and maintainability, especially in large programs.</li>
+                        <li>Abstraction: Functions provide abstraction by allowing us to use library functions without needing to know their internal workings.</li>
+                    </ul>
+
+                    <h3>Types of Functions:</h3>
+                    <ul>
+                        <li>User Defined Function: These are custom functions created by users to reduce the complexity of large programs.</li>
+                        <li>Library Function: Also known as built-in functions, these are provided by the compiler and offer various functionalities without needing to define them.</li>
+                    </ul>
+
+                    <h3>Parameter Passing Methods:</h3>
+                    <ul>
+                        <li>Pass by Value: Copies the values of actual parameters to formal parameters. Changes made inside the function do not affect the actual parameters.</li>
+                        <li>Pass by Reference: Both actual and formal parameters refer to the same memory locations. Changes made inside the function are reflected in the actual parameters.</li>
+                    </ul>
+
+                    <h3>Function Declaration:</h3>
+                    <div class="code">
+                        <p>// Function declaration</p>
+                        <p>int max(int x, int y);</p>
+                    </div>
+
+                    <h3>Function Definition:</h3>
+                    <div class="code">
+                        <p>// Function definition</p>
+                        <p>int max(int x, int y) {</p>
+                        <p>&emsp;if (x > y)</p>
+                        <p>&emsp;&emsp;return x;</p>
+                        <p>&emsp;else</p>
+                        <p>&emsp;&emsp;return y;</p>
+                        <p>}</p>
+                    </div>
+
+                    <h3>Functions Using Pointers:</h3>
+                    <div class="code">
+                        <p>// Function using pointers</p>
+                        <p>void fun(int* ptr) {</p>
+                        <p>&emsp;*ptr = 30;</p>
+                        <p>}</p>
+                    </div>
+
+                    <h3>Difference between Call by Value and Call by Reference:</h3>
+                    <table>
+                        <tr>
+                            <th>Call by Value</th>
+                            <th>Call by Reference</th>
+                        </tr>
+                        <tr>
+                            <td>A copy of the value is passed</td>
+                            <td>An address of the value is passed</td>
+                        </tr>
+                        <tr>
+                            <td>Changes made inside the function are not reflected outside</td>
+                            <td>Changes made inside the function are reflected outside</td>
+                        </tr>
+                        <tr>
+                            <td>Actual and formal arguments have different memory locations</td>
+                            <td>Actual and formal arguments share the same memory location</td>
+                        </tr>
+                    </table>
+                    </ol>
+                </div>
+            </div>
+            <div id="inheritance" style="display: none;">
+                <h2>Inheritance</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/rJlJ8qqVm3k?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="inhertiancequiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Inheritance</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>The capability of a class to derive properties and characteristics from another class is called Inheritance. Inheritance is one of the most important features of Object-Oriented Programming.</p>
+                        </li>
+                        <li>
+                            <p>Inheritance is a feature or a process in which, new classes are created from the existing classes. The new class created is called “derived class” or “child class” and the existing class is known as the “base class” or “parent class”. The derived class now is said to be inherited from the base class.</p>
+                        </li>
+                        <li>
+                            <h3>Types of Inheritance:</h3>
+                            <ul>
+                                <li>
+                                    <strong>Single Inheritance:</strong> In single inheritance, a class is allowed to inherit from only one class. i.e. one subclass is inherited by one base class only.
+                                    <div class="code">
+                                        <pre><code>
+            // Base class
+            class Vehicle {
+            public:
+                Vehicle() { cout << "This is a Vehicle\n"; }
+            };
+            
+            // Sub class derived from a single base class
+            class Car : public Vehicle {
+            };
+            
+            // main function
+            int main()
+            {
+                // Creating object of sub class will
+                // invoke the constructor of base classes
+                Car obj;
+                return 0;
+            }
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Multiple Inheritance:</strong> Multiple Inheritance is a feature of C++ where a class can inherit from more than one class. i.e. one subclass is inherited from more than one base class.
+                                    <div class="code">
+                                        <pre><code>
+            // base class
+            class Vehicle {
+            public:
+                Vehicle() { cout << "This is a Vehicle\n"; }
+            };
+            
+            // second base class
+            class FourWheeler {
+            public:
+                FourWheeler() { cout << "This is a 4 wheeler Vehicle\n"; }
+            };
+            
+            // sub class derived from two base classes
+            class Car : public Vehicle, public FourWheeler {
+            };
+            
+            // main function
+            int main()
+            {
+                // Creating object of sub class will
+                // invoke the constructor of base classes.
+                Car obj;
+                return 0;
+            }
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Multilevel Inheritance:</strong> In this type of inheritance, a derived class is created from another derived class.
+                                    <div class="code">
+                                        <pre><code>
+            // base class
+            class Vehicle {
+            public:
+                Vehicle() { cout << "This is a Vehicle\n"; }
+            };
+            
+            // first sub class derived from class vehicle
+            class fourWheeler : public Vehicle {
+            };
+            
+            // sub class derived from the derived base class fourWheeler
+            class Car : public fourWheeler {
+            };
+            
+            // main function
+            int main()
+            {
+                // Creating object of sub class will
+                // invoke the constructor of base classes.
+                Car obj;
+                return 0;
+            }
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Hierarchical Inheritance:</strong> In this type of inheritance, more than one subclass is inherited from a single base class. i.e. more than one derived class is created from a single base class.
+                                    <div class="code">
+                                        <pre><code>
+            // base class
+            class Vehicle {
+            public:
+                Vehicle() { cout << "This is a Vehicle\n"; }
+            };
+            
+            // first sub class
+            class Car : public Vehicle {
+            };
+            
+            // second sub class
+            class Bus : public Vehicle {
+            };
+            
+            // main function
+            int main()
+            {
+                // Creating object of sub class will
+                // invoke the constructor of base class.
+                Car obj1;
+                Bus obj2;
+                return 0;
+            }
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Hybrid (Virtual) Inheritance:</strong> Hybrid Inheritance is implemented by combining more than one type of inheritance.
+                                    <div class="code">
+                                        <pre><code>
+            // base class
+            class Vehicle {
+            public:
+                Vehicle() { cout << "This is a Vehicle\n"; }
+            };
+            
+            // base class
+            class Fare {
+            public:
+                Fare() { cout << "Fare\n"; }
+            };
+            
+            // sub class derived from both base classes
+            class Bus : public Vehicle, public Fare {
+            };
+            
+            // main function
+            int main()
+            {
+                // Creating object of sub class will
+                // invoke the constructor of base classes.
+                Bus obj;
+                return 0;
+            }
+                                        </code></pre>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="OOPS" style="display: none;">
+                <h2>OOPs Concepts</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/0NwsayeOsd4?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="OOPSquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ OOPS</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>Object-Oriented Programming (OOP) is a programming paradigm that revolves around the concept of objects, which can contain data in the form of fields (attributes or properties) and code in the form of procedures (methods or functions).</p>
+                        </li>
+                        <li>
+                            <h3>OOPs Concepts:</h3>
+                            <ul>
+                                <li>
+                                    <strong>Encapsulation:</strong> Encapsulation is the bundling of data and methods that operate on that data into a single unit or class. It helps in hiding the internal state of an object from the outside world and only exposes the necessary functionalities through methods.
+                                    <div class="code">
+                                        <pre><code>
+            class BankAccount {
+            private:
+                int accountNumber;
+                double balance;
+            public:
+                void deposit(double amount) {
+                    balance += amount;
+                }
+                void withdraw(double amount) {
+                    if (balance >= amount)
+                        balance -= amount;
+                }
+            };
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Inheritance:</strong> Inheritance is a mechanism in which a new class inherits properties and behavior from an existing class. It promotes code reusability and establishes a relationship between classes like parent-child.
+                                    <div class="code">
+                                        <pre><code>
+            // base class
+            class Vehicle {
+            public:
+                Vehicle() { cout << "This is a Vehicle\n"; }
+            };
+            
+            // sub class derived from a single base class
+            class Car : public Vehicle {
+            };
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Polymorphism:</strong> Polymorphism allows objects of different classes to be treated as objects of a common superclass. It can be achieved through method overloading (compile-time polymorphism) and method overriding (runtime polymorphism).
+                                    <div class="code">
+                                        <pre><code>
+            // Base class
+            class Shape {
+            public:
+                virtual void draw() {
+                    cout << "Drawing a Shape\n";
+                }
+            };
+            
+            // Derived class overriding the base class method
+            class Circle : public Shape {
+            public:
+                void draw() override {
+                    cout << "Drawing a Circle\n";
+                }
+            };
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Abstraction:</strong> Abstraction is the concept of hiding the complex implementation details and showing only the necessary features of an object. It focuses on what an object does rather than how it does it.
+                                    <div class="code">
+                                        <pre><code>
+            // Abstract base class
+            class Shape {
+            public:
+                virtual void draw() = 0; // Pure virtual function
+            };
+            
+            // Derived classes implementing the draw method
+            class Circle : public Shape {
+            public:
+                void draw() override {
+                    cout << "Drawing a Circle\n";
+                }
+            };
+                                        </code></pre>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Encapsulation:</strong> Encapsulation is the bundling of data and methods that operate on that data into a single unit or class. It helps in hiding the internal state of an object from the outside world and only exposes the necessary functionalities through methods.
+                                    <div class="code">
+                                        <pre><code>
+            class BankAccount {
+            private:
+                int accountNumber;
+                double balance;
+            public:
+                void deposit(double amount) {
+                    balance += amount;
+                }
+                void withdraw(double amount) {
+                    if (balance >= amount)
+                        balance -= amount;
+                }
+            };
+                                        </code></pre>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            
+            
+            <div id="structures" style="display: none;">
+                <h2>Structures</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/jCfR7CFlzts?autoplay=1""></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="structuresquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Structures</h2>
+                    <p>A structure in C++ is a user-defined data type that allows you to group together related data items of different data types under a single name. It is similar to a class in C++, but with some differences:</p>
+                    <ul>
+                        <li>By default, the members of a structure are public, whereas in a class they are private by default.</li>
+                        <li>Structures are typically used for grouping data items together, whereas classes are used for grouping data and methods.</li>
+                    </ul>
+                    <h3>Example:</h3>
+                    <div class="code">
+                        <pre><code>
+            // Defining a structure
+            struct Person {
+                string name;
+                int age;
+                float height;
+            };
+            
+            // Declaring a variable of type Person
+            Person person1;
+            
+            // Assigning values to the members of the structure
+            person1.name = "John";
+            person1.age = 30;
+            person1.height = 5.9;
+            
+            // Accessing the members of the structure
+            cout << "Name: " << person1.name << endl;
+            cout << "Age: " << person1.age << endl;
+            cout << "Height: " << person1.height << " feet" << endl;
+                        </code></pre>
+                    </div>
+                    <p>In the above example, we define a structure named Person with three members: name, age, and height. We then declare a variable person1 of type Person and assign values to its members. Finally, we access and print the values of the members.</p>
+                </div>
+            </div>
+            
+            <div id="pointers" style="display: none;">
+                <h2>Pointers</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/EvYmTCx9BFs?autoplay=1"></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="pointersquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">C++ Pointers</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>A pointer is a variable that stores the memory address of another variable.</p>
+                        </li>
+                        <li>
+                            <p>Pointers are used to store addresses of variables or dynamically allocated memory.</p>
+                        </li>
+                        <li>
+                            <p>To declare a pointer, you need to specify the data type of the variable it points to, followed by an asterisk (*) and the pointer's name.</p>
+                            <div class="code">
+                                <pre><code>
+            int *ptr; // pointer to an integer
+            double *ptr_d; // pointer to a double
+                                </code></pre>
+                            </div>
+                        </li>
+                        <li>
+                            <p>To assign the address of a variable to a pointer, you use the address-of operator (&).</p>
+                            <div class="code">
+                                <pre><code>
+            int num = 10;
+            int *ptr = &num; // pointer ptr now holds the address of num
+                                </code></pre>
+                            </div>
+                        </li>
+                        <li>
+                            <p>You can access the value of the variable pointed to by a pointer using the dereference operator (*)</p>
+                            <div class="code">
+                                <pre><code>
+            int num = 10;
+            int *ptr = &num; // pointer ptr now holds the address of num
+            cout << "Value of num: " << *ptr << endl; // Output: Value of num: 10
+                                </code></pre>
+                            </div>
+                        </li>
+                        <li>
+                            <p>Pointers can be used for dynamic memory allocation using operators like new and delete.</p>
+                            <div class="code">
+                                <pre><code>
+            int *ptr = new int; // dynamically allocate memory for an integer
+            *ptr = 20; // assign value 20 to the dynamically allocated integer
+            delete ptr; // free the memory allocated
+                                </code></pre>
+                            </div>
+                        </li>
+                        <li>
+                            <p>Pointers can also be used for arrays and functions.</p>
+                            <div class="code">
+                                <pre><code>
+            int arr[5] = {1, 2, 3, 4, 5};
+            int *ptr = arr; // pointer to the first element of the array
+            cout << "First element of the array: " << *ptr << endl; // Output: First element of the array: 1
+            
+            void foo(int *ptr) {
+                cout << "Value pointed to by ptr: " << *ptr << endl;
+            }
+            
+            int num = 10;
+            foo(&num); // passing the address of num to the function foo
+                                </code></pre>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="button-container">
+        <button onclick="showPrevious()" class="prev-button">Previous</button>
+        <button onclick="showNext()" class="next-button">Next</button>
+    </div>
+    
+    
+    <script>
+        
+        function menu() {
+            var s = document.getElementById('sidebar');
+            s.style.transform = s.style.transform === 'translateX(0px)' ? 'translateX(-100%)' : 'translateX(0px)';
+        }
+        
+        function content(id) {
+            var content = document.querySelectorAll('.main > div');
+            content.forEach(function(div) {
+                div.style.display = div.id === id ? 'block' : 'none';
+            });
+    
+
+            contentArray.forEach(function(div, index) {
+                if (div.id === id) {
+                    currentIndex = index;
+                }
+            });
+    
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').style.transform = 'translateX(-100%)';
+            }
+        }
+    
+        document.querySelectorAll('.sidebar a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    document.getElementById('sidebar').style.transform = 'translateX(-100%)';
+                }
+            });
+        });
+    
+        var currentIndex = 0;
+    
+        var contentArray = document.querySelectorAll('.main > div');
+    
+        function showPrevious() {
+            if (currentIndex > 0) {
+                contentArray[currentIndex].style.display = 'none';
+                contentArray[--currentIndex].style.display = 'block';
+            }
+        }
+    
+        function showNext() {
+            if (currentIndex < contentArray.length - 1) {
+                contentArray[currentIndex].style.display = 'none';
+                contentArray[++currentIndex].style.display = 'block';
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>

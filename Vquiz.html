@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2,h1 {
+            text-align: center;
+            color: skyblue;
+        }
+
+        #question-container {
+            margin-bottom: 200px;
+        }
+
+        #question-text {
+            font-size: 25px;
+            margin-top: 50px;
+            color: #28b8c5;
+        }
+
+        #answer-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+        }
+
+        button {
+            height: 50px;
+            width: 340px;
+            font-size: 16px;
+            background-color: #c3e8e8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d2d2d2;
+        }
+
+        #controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .score-info {
+            color: #28b8c5;    
+            margin-top: 50px;
+        }
+
+        #timer-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #timer-text {
+            font-size: 20px;
+            color: #a968f4;
+        }
+
+        #timer {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz for Views</h1>
+        <h2>Quiz App</h2>
+        <div id="question-container">
+          <p id="question-text"></p>
+          <div id="answer-buttons"></div>
+        </div>
+        <div id="controls-container">
+          <button id="start-button">Start Quiz</button>
+          <div id="timer-container">
+            <span id="timer-text">Time Left: <span id="timer">0</span></span>
+          </div>
+        </div>
+    </div>
+    <script>
+            const quizQuestions = [
+            {
+                question:'Views can be created for?',
+                options: ['a) One table','b) Many table','c) another view','d) All of the above'],
+                correctAnswer: 'd) All of the above'
+            },
+            {
+                question: 'A view is actually a?',
+                options: ['a) composition of a table','b) decomposition of a table','c) associated to a table','d) None of the above'],
+                correctAnswer: 'a) composition of a table'
+            },
+            {
+                question: 'A view can contain all rows of a table?',
+                options: ['a) TRUE','b) FALSE','c) Not all rows but all columns','d) Cannot say'],
+                correctAnswer: 'a) TRUE'
+            },
+            {
+                question: 'What is true about view?',
+                options: ['a)  Database views are created using the CREATE VIEW statement','b) To create a view, a user must have the appropriate system privilege according to the specific implementation.','c) Both A and B are true','d) Both A and B are false'],
+                correctAnswer: 'c) Both A and B are true'
+            },
+            {
+                question: 'Which option in view is to ensure that all UPDATE and INSERTs satisfy the condition(s) in the view definition?',
+                options: ['a) Uncheck','b) With Check','c) Check','d) With'],
+                correctAnswer: 'b) With Check'
+            },
+            ];
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let timeLeft = 120;
+            let timerInterval;
+            function startQuiz() {
+                document.getElementById("start-button").style.display = "none";
+                displayQuestion();
+                startTimer();
+            }
+            function displayQuestion() {
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            const questionText = document.getElementById("question-text");
+            const answerButtons = document.getElementById("answer-buttons");
+            questionText.innerHTML = "";
+            answerButtons.innerHTML = "";
+            questionText.innerHTML = currentQuestion.question;
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement("button");
+                button.innerText = option;
+                button.classList.add("answer-button");
+                answerButtons.appendChild(button);
+                button.addEventListener("click", function() {
+                checkAnswer(option);
+                });
+            });
+            }
+            function checkAnswer(selectedOption) {
+                const currentQuestion = quizQuestions[currentQuestionIndex];
+                if (selectedOption === currentQuestion.correctAnswer) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    displayQuestion();
+                } 
+                else {
+                    endQuiz();
+                }
+            }
+            function startTimer() {
+            timerInterval = setInterval(function() {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                if (timeLeft <= 0) {
+                endQuiz();
+                }
+            }, 1000);
+            }
+            function endQuiz() {
+            clearInterval(timerInterval);
+            const scorePercentage = (score / quizQuestions.length) * 10;
+            const questionContainer = document.getElementById("question-container");
+            questionContainer.innerHTML = `
+                <h2 class="h2">Quiz Completed!</h2>
+                <p class="score-info">Your Score: ${score} out of ${quizQuestions.length}</p>
+                <p class="score-info">Score Percentage: ${scorePercentage}%</p>
+            `;
+            }
+            document.getElementById("start-button").addEventListener("click", startQuiz);   
+      </script>
+</body>
+</html>

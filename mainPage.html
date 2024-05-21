@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBMS</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f4eeff;
+            font-family: "P lus Jakarta Sans", sans-serif;
+            line-height: 30px;
+            
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .sidebar {
+            width: 100%;
+            max-width: 300px;
+            color: #424874;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+            position: absolute;
+            top: 10px;
+            left: 0;
+            height: 340%;
+            overflow-y: auto;
+            z-index: 1;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            margin-bottom: 20px; 
+            font-size: 25px;
+            margin-left: 20px;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: inherit; 
+        }
+        .sidebar ul li a:hover {
+            color: #dcd6f7;
+        }
+
+        .ham {
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            color: #424874;
+            background-color: transparent; 
+            padding: 0; 
+            border: none; 
+
+        }
+        h1 {
+            text-align: center;
+            color: #a6b1e1;
+        }
+        h2{
+            color: #a6b1e1;
+        }
+      
+        .main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            position: relative;
+            z-index: 0;
+        }
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 400px;
+        }
+        .introquiz {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: white;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #a6b1e1;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .code {
+            background: #f4f4f4;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #dcd6f7;
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .quiz-button:hover {
+            background-color: #424874;
+        }
+        .notes {
+            padding: 20px;  
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: large;
+        }
+        .button-container {
+            text-align: center;
+            
+        }
+
+        .prev-button {
+            margin-left: 320px;
+            float: left;
+            border-radius: 50px;
+            border: 1px solid #424874;
+            background-color: #a6b1e1;
+            font-size: large;
+            color: white;
+        }
+
+        .next-button {
+            margin-left:1000px;
+            border-radius: 50px;
+            border: 1px solid #424874;
+            background-color: #a6b1e1;
+            font-size: large;
+            color: white;
+            transition: transform 0.2s;
+        }
+        
+
+        @media only screen and (max-width: 767px) {
+            .prev-button, .next-button {
+                margin: 0;
+                float: none;
+            }
+        }
+        @media only screen and (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+            
+            .main {
+                margin-left: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>DBMS</h1>
+    <div class="ham" onclick="menu()">
+        &#9776
+    </div>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <h2>MENU</h2>
+            <ul>
+                <li><a href="#"onclick="content('intro')">Introduction to DBMS</a></li>
+                <li><a href="#"onclick="content('relational_model')">Relational Model</a></li>
+                <li><a href="#"onclick="content('sql')">SQL (Structured Query Language)</a></li>
+                <li><a href="#"onclick="content('normalization')">Normalization</a></li>
+                <li><a href="#"onclick="content('indexing')">Indexing</a></li>
+                <li><a href="#"onclick="content('transactions')">Transactions</a></li>
+                <li><a href="#"onclick="content('joins')">Joins</a></li>
+                <li><a href="#"onclick="content('views')">Views</a></li>
+                
+            </ul>
+        </div>
+        <div class="main">
+            <div id="intro">
+                <h2>Introduction</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/6Iu45VZGQDk?si=wU75y0abs_Ctb8I_" ></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="quiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">DBMS Introduction</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>A database management system (DBMS) refers to the technology for creating and managing databases. DBMS is a software tool to organize (create, retrieve, update, and manage) data in a database.<br><br>
+                                The main aim of a DBMS is to supply a way to store up and retrieve database information that is both convenient and efficient. By data, we mean known facts that can be recorded and that have embedded meaning. Usually, people use software such as DBASE IV or V, Microsoft ACCESS, or EXCEL to store data in the form of a database. A datum is a unit of data. Meaningful data combined to form information. Hence, information is interpreted data - data provided with semantics. MS. ACCESS is one of the most common examples of database management software.<br>
+                            </p>
+                        </li>
+                        </ol>
+                        <h2>Why use DBMS</h2>
+                    <ul>
+                        <li>To develop software applications In less time.</li>
+                        <li>Independence and efficient use of data.</li>
+                        <li>For uniform data administration.</li>
+                        <li>Data integrity and security.</li>
+                        <li>Concurrent access to data, and data recovery from crashes.</li>
+                        <li>Use user-friendly declarative query language.</li>
+                    </ul>
+            
+                    <h2>Components of DBMS: </h2>
+                    <ul>
+                        <li>Users: Users may be of any kind such as DB administrator, System developer, or database users.</li>
+                        <li>Database application: Database application may be Departmental, Personal, organization's and / or Internal.</li>
+                        <li>DBMS: Software that allows users to create and manipulate database access,</li>
+                        <li>Database: Collection of logical data as a single unit.</li>
+                    </ul>
+                    
+                    <h2>Advantages of DBMS:</h2>
+                    <ul>
+                        <li>Data independence: Application programs should be as free or independent as possible from details of data representation and storage. DBMS can supply an abstract view of the data for insulating application code from such facts.</li>
+                        <li>Efficient data access: DBMS utilizes a mixture of sophisticated concepts and techniques for storing and retrieving data competently. This feature becomes important in cases where the data is stored on external storage devices.</li>
+                        <li>Data integrity and security: If data is accessed through the DBMS, the DBMS can enforce integrity constraints on the data.</li>
+                        <li>Data administration: When several users share the data, integrating the administration of data can offer significant improvements. Experienced professionals understand the nature of the data being managed and can be responsible for organizing the data representation to reduce redundancy and make the data to retrieve efficiently.</li>
+                    </ul>
+                    
+                    <h2>Disadvantages of DBMS:</h2>
+                    <ul>
+                        <li>Complexity
+
+                            The provision of the functionality that is expected of a good DBMS makes the DBMS an extremely complex piece of software. Database designers, developers, database administrators and end-users must understand this functionality to take full advantage of it.
+                            Failure to understand the system can lead to bad design decisions, which leads to a serious consequence for an organization.
+                            Size
+                            The functionality of DBMS makes use of a large piece of software which occupies megabytes of disk space.</li>
+                            
+                            <li>Performance
+                            Performance may not run as fast as desired.</li>
+                            
+                            <li>Higher impact of a failure
+                            The centralization of resources increases the vulnerability of the system because all users and applications rely on the availability of DBMS, the failure of any component can bring operation to halt.</li>
+                            
+                            <li>Cost of DBMS
+                            The cost of DBMS varies significantly depending on the environment and functionality provided. There is also the recurrent annual maintenance cost.</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="relational_model" style="display: none;">
+                <h2>Relational Model</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/Q45sr5p_NmQ?si=5SPW0wt907hhuK5Q" ></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="Rquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">Relational Model</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>Relational model can represent as a table with columns and rows. Each row is known as a tuple. Each table of the column has a name or attribute.<br>
+                            </p>
+                        </li>
+                        </ol>
+                        <h2>Some important terms</h2>
+                    <ul>
+                        <li>Domain: It contains a set of atomic values that an attribute can take.</li>
+                        <li>Attribute: It contains the name of a column in a particular table. Each attribute Ai must have a domain, dom(Ai)</li>
+                        <li>Relational instance: In the relational database system, the relational instance is represented by a finite set of tuples. Relation instances do not have duplicate tuples.</li>
+                        <li>Relational schema: A relational schema contains the name of the relation and name of all columns or attributes.</li>
+                        <li>Relational key: In the relational key, each row has one or more attributes. It can identify the row in the relation uniquely</li>
+                    </ul>
+            
+                    <h2>Properties of Relations</h2>
+                    <ul>
+                        <li>Name of the relation is distinct from all other relations.</li>
+                        <li>Each relation cell contains exactly one atomic (single) value</li>
+                        <li>Each attribute contains a distinct name</li>
+                        <li>Attribute domain has no significance</li>
+                        <li>tuple has no duplicate value</li>
+                        <li>Order of tuple can have a different </li>
+
+                    </ul>
+                    <h2>Characteristics of the Relational Model</h2>
+                    <ul>
+                        <li>Data is represented in rows and columns called relations.</li>
+                        <li>Data is stored in tables having relationships between them called the Relational model.</li>
+                        <li>The relational model supports the operations like Data definition, Data manipulation, and Transaction management.</li>
+                        <li>Each column has a distinct name and they are representing attributes.</li>
+                        <li>Each row represents a single entity. </li>
+                    </ul>
+                    
+                    <h2>Advantages of the Relational Model</h2>
+                    <ul>
+                        <li>Simple model: Relational Model is simple and easy to use in comparison to other languages.</li>
+                        <li>Flexible: Relational Model is more flexible than any other relational model present.</li>
+                        <li>Secure: Relational Model is more secure than any other relational model.</li>
+                        <li>Data Accuracy: Data is more accurate in the relational data model.</li>
+                        <li>Data Integrity: The integrity of the data is maintained in the relational model.</li>
+                        <li>Operations can be Applied Easily: It is better to perform operations in the relational model.</li>
+                    </ul>
+                    
+                    <h2>Disadvantages of the Relational Model</h2>
+                    <ul>
+                        <li>Relational Database Model is not very good for large databases.</li>
+                        <li>Sometimes, it becomes difficult to find the relation between tables.</li>
+                        <li>Because of the complex structure, the response time for queries is high.</li>
+                    </ul>
+                        
+                </div>
+            </div>
+            <div id="sql" style="display: none;">
+                <h2>SQL</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/QvTo1_-n0UE?si=nhwA1T_NmeF71zpT" ></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="Squiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">SQL</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>SQL stands for Structured Query Language. It is used for storing and managing data in relational database management system (RDMS).
+                                It is a standard language for Relational Database System. It enables a user to create, read, update and delete relational databases and tables.
+                                All the RDBMS like MySQL, Informix, Oracle, MS Access and SQL Server use SQL as their standard database language.
+                                SQL allows users to query the database in a number of ways, using English-like statements.</p>
+                        </li>
+                        </ol>
+                        <h2>Rules:</h2>
+                        <ul>
+                            <li>SQL follows the following rules:</li><br><br>
+
+                            <li>Structure query language is not case sensitive. Generally, keywords of SQL are written in uppercase.</li>
+                            <li>Statements of SQL are dependent on text lines. We can use a single SQL statement on one or multiple text line.</li>
+                            <li>Using the SQL statements, you can perform most of the actions in a database.</li>
+                            <li>SQL depends on tuple relational calculus and relational algebra.</li>
+                        </ul>
+                        <h2>SQL process</h2>
+
+                        <ul>
+                            <li>When an SQL command is executing for any RDBMS, then the system figure out the best way to carry out the request and the SQL engine determines that how to interpret the task.</li>
+                            <li>In the proc,liess, various components are included. These components can be optimization Engine, Query engine, Query dispatcher, classic, etc.</li>
+                            <li>All the non-SQL queries are handled by the classic query engine, but SQL query engine won't handle logical files.</li>
+                            
+                        </ul>
+                        
+                </div>
+            </div>
+            <div id="normalization" style="display: none;">
+                <h2>Normalization</h2>
+                <div class="video-container">
+                    <iframe width="600" height="350" src="https://www.youtube.com/embed/p-j9emhNVTg?si=hQq7aWTjuKJz2iJ2" ></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="Nquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">Normalization</h2>
+                    <ol style="list-style-type: circle;">
+                        <li>
+                            <p>Normalization in DBMS is a technique using which you can organize the data in the database tables so that:
+                               There is less repetition of data, 
+                                A large set of data is structured into a bunch of smaller tables,
+                                and the tables have a proper relationship between them.
+                                DBMS Normalization is a systematic approach to decompose (break down) tables to eliminate data redundancy(repetition) and undesirable characteristics like Insertion anomaly in DBMS, Update anomaly in DBMS, and Delete anomaly in DBMS.
+                                It is a multi-step process that puts data into tabular form, removes duplicate data, and set up the relationship between tables.</p>
+                        </li>
+                        </ol>
+                        <h2>Why we need Normalization in DBMS?</h2>
+                        <ul>
+                            <li>Normalization is required for,</li><br><br>
+                            <li>Eliminating redundant(useless) data, therefore handling data integrity, because if data is repeated it increases the chances of inconsistent data.</li>
+                            <li>Normalization helps in keeping data consistent by storing the data in one table and referencing it everywhere else.</li>
+                            <li>Storage optimization although that is not an issue these days because Database storage is cheap.</li>
+                            <li>Breaking down large tables into smaller tables with relationships, so it makes the database structure more scalable and adaptable.</li>
+                            <li>Ensuring data dependencies make sense i.e. data is logically stored.</li>
+                            <li>This video will give you a good overview of Database Normalization. If you want you can skip the video, as the concept is covered in this tutorial as well - Normalization in DBMS (YouTube Video).</li>
+                        </ul>
+                        <h2>Problems without Normalization in DBMS</h2><br>
+                        <ul>
+                            <li>If a table is not properly normalized and has data redundancy(repetition) then it will not only eat up extra memory space but will also make it difficult for you to handle and update the data in the database, without losing data.</li>
+                            <li>Insertion, Updation, and Deletion Anomalies are very frequent if the database is not normalized.</li>
+                        </ul>
+                        <h2>Types of Normal Form</h2>
+                        <ul>
+                            <li>First Normal Form</li>
+                            <li>Second Normal Form</li>
+                            <li>Third Normal Form</li>
+                            <li>BCNF</li>
+                            <li>Fourth Normal Form</li>
+                            <li>Fifth Normal Form</li>
+                        </ul>
+                </div>
+            </div>
+            <div id="indexing" style="display: none;">
+                <h2>Indexing</h2>
+                                
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/iFD4hVJFuuU?si=guLjjRv5mwbK-46d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="Iquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">Indexing</h2>
+                    <h2>Indexing in DBMS</h2>
+                    <ul>
+                        <li>Indexing is used to optimize the performance of a database by minimizing the number of disk accesses required when a query is processed.</li>
+                        <li>The index is a type of data structure. It is used to locate and access the data in a database table quickly.</li>
+                    </ul>
+            
+                    <h2>Indexing Methods</h2>
+                    <ul>
+                        <li>Ordered indices</li>
+                        <li>Primary Index</li>
+                        <li>Dense index</li>
+                        <li>Sparse index</li>
+                        <li>Clustering Index</li>
+                        <li>Secondary Index</li>
+
+                    </ul>
+                    <h2>Attributes of Indexing</h2>
+                    <ul>
+                        <li>Access Types: This refers to the type of access such as value-based search, range access, etc.</li>
+                        <li>Access Time: It refers to the time needed to find a particular data element or set of elements.</li>
+                        <li>Insertion Time: It refers to the time taken to find the appropriate space and insert new data.</li>
+                        <li>Deletion Time: Time taken to find an item and delete it as well as update the index structure.</li>
+                        <li>Space Overhead: It refers to the additional space required by the index.</li>
+                    </ul>
+                    
+                    
+                </div>          
+            </div>
+            <div id="joins" style="display: none;">
+                <h2>Joins</h2>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/xkezaLeOOBY?si=nALR0UG99fDXkQIm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="Jquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">Joins</h2>
+                    <ol style="list-style-type: circle;"></ol>
+                    <h2>SQL JOIN</h2>
+                    <ul>
+                        <p>As the name shows, JOIN means to combine something. In case of SQL, JOIN means "to combine two or more tables".
+
+                            In SQL, JOIN clause is used to combine the records from two or more tables in a database.</p>
+                            </ul>
+                    <h2>Types of SQL JOIN</h2>
+                    <ul>
+                        <li>INNER JOIN</li>
+                        <li>LEFT JOIN</li>
+                        <li>RIGHT JOIN</li>
+                        <li>FULL JOIN</li>
+                        
+                    </ul>
+                    
+                    <h2> Performance Considerations:</h2>
+                    <ul>
+                        <li>Joins can impact performance, especially in large databases. Proper indexing, normalization, and query optimization techniques should be employed to enhance performance.</li>
+                        <li>Use appropriate join types based on the relationship between tables and the desired result.</li>
+                    </ul>
+                    
+                    <h2>Other Join Techniques:</h2>
+                    <ul>
+                        <li>Cross Join: Returns the Cartesian product of the two tables, resulting in a combination of every row from both tables.</li>
+                        <li>Self Join: When a table is joined with itself based on a related column, typically used when a table has a hierarchical relationship within itself.</li>
+                    </ul>
+                    <h2>Join Conditions:</h2>
+                    <ul>
+                        <li>Join conditions are the predicates that define how the tables should be matched.</li>
+                        <li>These conditions are typically specified using the "ON" clause, but can also be included in the "WHERE" clause, although it's less common and might lead to confusion.</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="transactions" style="display: none;">
+                <h2>Transactions</h2>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6qFyCIH_QnQ?si=k_7WMYhF_oG0D6BR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="introquiz">
+                        <h3>Quiz</h3>
+                        <a class="quiz-button" href="Tquiz.html">Click me</a>
+                    </div>
+                </div>
+                <div class="notes">
+                    <h2 style="text-align: center;">Transactions</h2>
+                    <ol style="list-style-type: circle;"></ol>
+                    <h2>Transaction</h2>
+                    <ul>
+                        <li>The transaction is a set of logically related operation. It contains a group of tasks.</li>
+                        <li>A transaction is an action or series of actions. It is performed by a single user to perform operations for accessing the contents of the database</li>
+                    </ul>
+                    <h2>Operations of Transaction:</h2>
+                    <ul>
+                        <li>Read(X): Read operation is used to read the value of X from the database and stores it in a buffer in main memory.</li>
+                        <li>Write(X): Write operation is used to write the value back to the database from the buffer</li>
+                        <li>Commit: It is used to save the work done permanently.</li>
+                        <li>Rollback: It is used to undo the work done.</li>
+                    </ul>
+                    
+                    <h2>Transaction property</h2>
+                    <ul>
+                        <li>Atomicity</li>
+                        <li>Consistency</li>
+                        <li>Isolation</li>
+                        <li>Durability</li>
+                    </ul>
+                    
+                    <h2>States of Transaction</h2>
+                    <ul>
+                        <li>Active state</li>
+                        <li>Partially committed</li>
+                        <li>Committed</li>
+                        <li>Failed state</li>
+                        <li>Aborted</li>
+                    </ul>
+                </div>
+                <div id="views" style="display: none;">
+                    <h2>Views</h2>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/I_PrZ1NHZr8?si=_FwfEDmPbl00m8Xu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="introquiz">
+                            <h3>Quiz</h3>
+                            <a class="quiz-button" href="Vquiz.html">Click me</a>
+                        </div>
+                    </div>
+                    <div class="notes">
+                        <h2 style="text-align: center;">Views</h2>
+                        <ol style="list-style-type: circle;">
+                        </ol>
+                        <h2>Views in SQL</h2>
+                        <ul>
+                            <li>Views in SQL are considered as a virtual table. A view also contains rows and columns.</li>
+                            <li>To create the view, we can select the fields from one or more tables present in the database.</li>
+                            <li>A view can either have specific rows based on certain condition or all the rows of a table.</li>
+                        </ul>
+                
+                        <h2>Advantages of View:</h2>
+                        <ul>
+                            <li>Complexity: Views help to reduce the complexity. Different views can be created on the same base table for different users.
+                            <li>Security: It increases the security by excluding the sensitive information from the view.</li>
+                            <li>Query Simplicity: It helps to simplify commands from the user. A view can draw data from several different tables and present it as a single table.</li>
+                            <li>Consistency: A view can present a consistent, unchanged image of the structure of the database. Views can be used to rename the columns without affecting the base table.</li>
+                            <li>Data Integrity: If data is accessed and entered through a view, the DBMS can automatically check the data to ensure that it meets the specified integrity constraints.</li>
+                            <li>Storage Capacity: Views take very little space to store the data.</li>
+                            <li>Logical Data Independence: View can make the application and database tables to a certain extent independent.</li>
+    
+                        </ul>
+                        <h2>Disadvantages of View</h2>
+                        <ul>
+                            <li>You cannot INSERT if the base table has any not null column that do not appear in view.</li>
+                            <li>You cannot INSERT or UPDATE if any of the column referenced in the INSERT or UPDATE contains group functions or columns defined by expression.</li>
+                            <li>You can't execute INSERT, UPDATE, DELETE statements on a view if with read only option is enabled.</li>
+                            <li>You can't be created view on temporary tables.</li>
+                            <li>You cannot INSERT, UPDATE, DELETE if the view contains group functions GROUP BY, DISTINCT or a reference to a psuedocolumn rownum.</li>
+                            <li>You can't pass parameters to the SQL server views.</li>
+                            <li>You can't associate rules and defaults with views.</li>
+                        </ul>
+                        
+                        <h2>Significance of Views</h2>
+                        <ul>
+                            <p>Views are highly significant, as they can provide advantages over tasks. Views can represent a subset of data contained in a table. Consequently they can limit the degree of exposure of the underlying base table to the outer world. They are used for security purpose in database and act as an intermediate between real table schemas and programmability. They act as aggregate tables.</p>
+                        </ul>
+                        
+                        <h2>Types of Views:</h2>
+                        <ul>
+                            <li>Join View: A join view is a view that has more than one table or view in its from clause and it does not use any Group by Clause, Rownum, Distinct and set operation.</li>
+                            <li>Inline View: An inline view is a view which is created by replacing a subquery in the from clause which defines the data source that can be referenced in the main query. The sub query must be given an alias for efficient working.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+<div class="button-container">
+    <button onclick="showPrevious()" class="prev-button">Previous</button>
+    <button onclick="showNext()" class="next-button">Next</button>
+</div>
+
+
+<script>
+    
+    function menu() {
+        var s = document.getElementById('sidebar');
+        s.style.transform = s.style.transform === 'translateX(0px)' ? 'translateX(-100%)' : 'translateX(0px)';
+    }
+    
+    function content(id) {
+        var content = document.querySelectorAll('.main > div');
+        content.forEach(function(div) {
+            div.style.display = div.id === id ? 'block' : 'none';
+        });
+
+
+        contentArray.forEach(function(div, index) {
+            if (div.id === id) {
+                currentIndex = index;
+            }
+        });
+
+        if (window.innerWidth < 768) {
+            document.getElementById('sidebar').style.transform = 'translateX(-100%)';
+        }
+    }
+
+    document.querySelectorAll('.sidebar a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').style.transform = 'translateX(-100%)';
+            }
+        });
+    });
+
+    var currentIndex = 0;
+
+    var contentArray = document.querySelectorAll('.main > div');
+
+    function showPrevious() {
+        if (currentIndex > 0) {
+            contentArray[currentIndex].style.display = 'none';
+            contentArray[--currentIndex].style.display = 'block';
+        }
+    }
+
+    function showNext() {
+        if (currentIndex < contentArray.length - 1) {
+            contentArray[currentIndex].style.display = 'none';
+            contentArray[++currentIndex].style.display = 'block';
+        }
+    }
+</script>
+
+
+</body>
+</html>

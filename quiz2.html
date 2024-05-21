@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz1</title>
+    <script src="C:\xampp\htdocs\FSD.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2,h1 {
+            text-align: center;
+            color: rgb(3, 37, 50);
+        }
+
+        #question-container {
+            margin-bottom: 200px;
+        }
+
+        #question-text {
+            font-size: 25px;
+            margin-top: 50px;
+            color: #040558;
+        }
+
+        #answer-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+        }
+
+        button {
+            height: 50px;
+            width: 340px;
+            font-size: 16px;
+            background-color: #bbc1c1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #87d5ec;
+        }
+
+        #controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .score-info {
+            color: #0c8606;    
+            margin-top: 50px;
+        }
+
+        #timer-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #timer-text {
+            font-size: 20px;
+            color: #a45cf5;
+        }
+
+        #timer {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz for Conditional Statements in Java</h1>
+        <h2>Quiz App</h2>
+        <div id="question-container">
+          <p id="question-text"></p>
+          <div id="answer-buttons"></div>
+        </div>
+        <div id="controls-container">
+          <button id="start-button" class="btn btn-primary" width="200px">Start Quiz</button>
+          <div id="timer-container">
+            <span id="timer-text">Time Left: <span id="timer">0</span></span>
+          </div>
+        </div>
+    </div>
+    <script>
+            const quizQuestions = [
+            {
+                question: 'Which of these selection statements test only for equality?',
+                options: ['if', 'switch', 'if & switch', 'None'],
+                correctAnswer: 'switch'
+            },
+            {
+                question: 'Which of these are selection statements in Java?',
+                options: ['if()', 'for()', 'continue', 'break'],
+                correctAnswer: 'if()'
+            },
+            {
+                question: 'Which of the following loops will execute the body of loop even when condition controlling the loop is initially false?',
+                options: ['do-while', 'while', 'for','None'],
+                correctAnswer: 'do-while'
+            },
+            {
+                question: 'An ELSE statement must be preceded by ____ statement in Java.',
+                options: ['if', 'else if', 'if or else if', 'None'],
+                correctAnswer: 'if or else if'
+            },
+            {
+                question: 'An IF statement in Java is also a ____ statement.',
+                options: ['boolean', 'conditional', 'iterative', ' optional'],
+                correctAnswer: 'conditional'
+            },
+            ];
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let timeLeft = 60;
+            let timerInterval;
+            function startQuiz() {
+                document.getElementById("start-button").style.display = "none";
+                displayQuestion();
+                startTimer();
+            }
+            function displayQuestion() {
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            const questionText = document.getElementById("question-text");
+            const answerButtons = document.getElementById("answer-buttons");
+            questionText.innerHTML = "";
+            answerButtons.innerHTML = "";
+            questionText.innerHTML = currentQuestion.question;
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement("button");
+                button.innerText = option;
+                button.classList.add("answer-button");
+                answerButtons.appendChild(button);
+                button.addEventListener("click", function() {
+                checkAnswer(option);
+                });
+            });
+            }
+            function checkAnswer(selectedOption) {
+                const currentQuestion = quizQuestions[currentQuestionIndex];
+                if (selectedOption === currentQuestion.correctAnswer) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    displayQuestion();
+                } 
+                else {
+                    endQuiz();
+                }
+            }
+            function startTimer() {
+            timerInterval = setInterval(function() {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                if (timeLeft <= 0) {
+                endQuiz();
+                }
+            }, 1000);
+            }
+            function endQuiz() {
+            clearInterval(timerInterval);
+            const scorePercentage = (score / quizQuestions.length) * 10;
+            const questionContainer = document.getElementById("question-container");
+            questionContainer.innerHTML = `
+                <h2 class="h2">Quiz Completed!</h2>
+                <center><p class="score-info">Your Score: ${score} out of ${quizQuestions.length}</p>
+                <p class="score-info">Score Percentage: ${scorePercentage}%</p>
+                <button onclick="backtohome()">Back To Home Page</button></center>
+            `;
+            }
+            document.getElementById("start-button").addEventListener("click", startQuiz);  
+            
+      </script>
+</body>
+</html>

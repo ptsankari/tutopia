@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance Quiz</title>
+    <style>
+         body {
+            background-color: #f2f2f2;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .quiz-container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #f4eeff;
+            border-radius: 10px;
+            padding: 60px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2, p {
+            text-align: center;
+            color: #a6b1e1;
+        }
+
+        #question-container {
+            margin-bottom: 20px;
+            font-size: larger;
+        }
+
+        #answer-buttons {
+            display: grid;
+            grid-gap: 10px;
+        }
+
+        button {
+            height: 50px;
+            font-size: 16px;
+            background-color: #a6b1e1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #424874;
+        }
+
+        #controls-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .score-info {
+            margin-top: 20px;
+        }
+
+        #timer-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #timer-text {
+            font-size: 18px;
+            color: #a6b1e1;
+            margin-left: 15px;
+        }
+
+        #timer {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        @media screen and (max-width: 768px) {
+            #answer-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            #answer-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz for Inheritance in C++</h1>
+        <div id="question-container">
+          <p id="question-text"></p>
+          <div id="answer-buttons"></div>
+        </div>
+        <div id="controls-container">
+          <button id="start-button">Start Quiz</button>
+          <div id="timer-container">
+            <span id="timer-text">Time Left: <span id="timer">0</span></span>
+          </div>
+        </div>
+    </div>
+    <script>
+        const quizQuestions = [
+            {
+                question: 'What is the access specifier used to specify private inheritance in C++?',
+                options: ['private', 'protected', 'public', 'none of the above'],
+                correctAnswer: 'private'
+            },
+            {
+                question: 'Which keyword is used to implement inheritance in C++?',
+                options: ['class', 'extend', 'inherit', 'public'],
+                correctAnswer: 'public'
+            },
+            {
+                question: 'Which type of inheritance allows a class to inherit from more than one base class?',
+                options: ['Single inheritance', 'Multiple inheritance', 'Hierarchical inheritance', 'Multilevel inheritance'],
+                correctAnswer: 'Multiple inheritance'
+            },
+            {
+                question: 'Which access specifier allows a derived class to access the public and protected members of its base class?',
+                options: ['public', 'protected', 'private', 'friend'],
+                correctAnswer: 'protected'
+            },
+            {
+                question: 'Which type of inheritance involves a class inheriting properties and behavior from more than one base class?',
+                options: ['Single inheritance', 'Multiple inheritance', 'Hierarchical inheritance', 'Multilevel inheritance'],
+                correctAnswer: 'Multiple inheritance'
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timeLeft = 120;
+        let timerInterval;
+
+        function startQuiz() {
+            document.getElementById("start-button").style.display = "none";
+            displayQuestion();
+            startTimer();
+        }
+
+        function displayQuestion() {
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            const questionText = document.getElementById("question-text");
+            const answerButtons = document.getElementById("answer-buttons");
+
+            questionText.innerHTML = currentQuestion.question;
+            answerButtons.innerHTML = "";
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement("button");
+                button.innerText = option;
+                button.classList.add("answer-button");
+                answerButtons.appendChild(button);
+                button.addEventListener("click", function() {
+                    checkAnswer(option);
+                });
+            });
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.correctAnswer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(function() {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        function endQuiz() {
+            clearInterval(timerInterval);
+            const scorePercentage = (score / quizQuestions.length) * 100;
+            const questionContainer = document.getElementById("question-container");
+            questionContainer.innerHTML = `
+                <h2>Quiz Completed!</h2>
+                <p class="score-info">Your Score: ${score} out of ${quizQuestions.length}</p>
+                <p class="score-info">Score Percentage: ${scorePercentage.toFixed(2)}%</p>
+            `;
+        }
+
+        document.getElementById("start-button").addEventListener("click", startQuiz);
+    </script>
+</body>
+</html>
